@@ -59,7 +59,11 @@ export default class ToDo {
     this.#notes = notes;
   }
 
-  setIsChecked(isChecked) {
-    this.#isChecked = isChecked;
+  check() {
+    this.#isChecked = true;
+  }
+
+  unCheck() {
+    this.#isChecked = false;
   }
 }
