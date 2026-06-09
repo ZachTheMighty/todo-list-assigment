@@ -1,4 +1,4 @@
-export default class toDo {
+export default class ToDo {
   #title;
   #description;
   #dueDate;
@@ -63,12 +63,3 @@ export default class toDo {
     this.#isChecked = isChecked;
   }
 }
-
-const toDo1 = new toDo(
-  "to do title",
-  "do all da tings",
-  "2050-10-10",
-  "important",
-  "a lotta notes",
-  false,
-);
