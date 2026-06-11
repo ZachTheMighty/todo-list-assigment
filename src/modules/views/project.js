@@ -1,31 +1,123 @@
-import { dialog } from "./dialog.js";
+import createDialog from "./dialog.js";
 
-export default function createProject(name, toDo) {
-  const main = document.querySelector("main");
+export default class ProjectView {
+  constructor() {
+    this.app = document.querySelector(".projects");
 
-  const projectDiv = document.createElement("div");
-  projectDiv.classList.add("project");
+    this.createProjectDialog = createDialog("add-project", "Add project");
+    this.createProjectForm = createForm("Add project");
+    this.createProjectDialog.append(this.createProjectForm);
 
-  projectDiv.append(dialog);
+    this.renameProjectDialog = createDialog("rename-project", "Rename project");
+    this.renameProjectForm = createForm("Rename project");
+    this.renameProjectDialog.append(this.renameProjectForm);
 
-  const projectName = document.createElement("h1");
-  projectName.textContent = name;
+    this.addProjectButton = document.createElement("button");
+    this.addProjectButton.textContent = "Add project";
+    this.addProjectButton.setAttribute("command", "show-modal");
+    this.addProjectButton.setAttribute("commandfor", "add-project");
 
-  const breakLine = document.createElement("hr");
+    this.deleteProjectButtons = [];
 
-  const toDoDiv = document.createElement("div");
-  toDoDiv.classList.add("to-do");
-  toDoDiv.textContent = "no tasks";
+    this.app.append(
+      this.addProjectButton,
+      this.createProjectDialog,
+      this.renameProjectDialog,
+    );
+  }
 
-  const addToDoButton = document.createElement("button");
-  addToDoButton.textContent = "New task";
-  addToDoButton.setAttribute("command", "show-modal");
-  addToDoButton.setAttribute("commandfor", "add-task");
+  render(project) {
+    if (this.app.querySelector(":scope > .empty-message"))
+      document.querySelector(".empty-message").remove();
 
-  projectDiv.append(projectName);
-  projectDiv.append(breakLine);
-  projectDiv.append(toDoDiv);
-  projectDiv.append(addToDoButton);
+    const projectDiv = document.createElement("div");
+    projectDiv.classList.add("project");
 
-  main.append(projectDiv);
+    const projectName = document.createElement("button");
+    projectName.textContent = project.name;
+    projectName.setAttribute("command", "show-modal");
+    projectName.setAttribute("commandfor", "rename-project");
+
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.classList.add("delete-project");
+    deleteProjectButton.textContent = "Delete project";
+    deleteProjectButton.setAttribute("data-id", project.id);
+
+    this.deleteProjectButtons.push(deleteProjectButton);
+
+    projectDiv.append(projectName, deleteProjectButton);
+
+    const breakLine = document.createElement("hr");
+
+    this.app.append(projectDiv, breakLine);
+  }
+
+  deleteProject(id) {
+    const deleteButton = document.querySelector(`[data-id="${id}"]`);
+    deleteButton.parentElement.nextElementSibling.remove();
+    deleteButton.parentElement.remove();
+
+    const emptyMessage = document.createElement("div");
+    emptyMessage.classList.add("empty-message");
+    emptyMessage.textContent = "You don't have any projects. Add some";
+
+    if (!this.app.querySelector(":scope > .project"))
+      this.app.append(emptyMessage);
+  }
+
+  bindAddProject(handler) {
+    this.createProjectForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      handler();
+      this.createProjectForm.reset();
+    });
+  }
+
+  bindRenameProject(handler) {
+    let projectToBeRenamed = null;
+
+    this.renameProjectDialog.addEventListener("command", (event) => {
+      if (event.command === "show-modal") projectToBeRenamed = event.source;
+    });
+
+    this.renameProjectForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      handler(projectToBeRenamed);
+      this.renameProjectForm.reset();
+    });
+  }
+
+  bindDeleteProject(handler) {
+    const defaultDeleteButton = document.querySelector(".delete-project");
+    defaultDeleteButton.addEventListener("click", () =>
+      handler(defaultDeleteButton.getAttribute("data-id")),
+    );
+  }
+}
+
+function createForm(submitButtonName) {
+  const form = document.createElement("form");
+  const div = document.createElement("div");
+
+  const label = document.createElement("label");
+  label.textContent = "Project name";
+  label.for = "name";
+
+  const input = document.createElement("input");
+  input.id = "name";
+  input.name = "name";
+  input.required = true;
+  input.autofocus = true;
+  input.autocomplete = "off";
+
+  const submitButton = document.createElement("button");
+  submitButton.textContent = submitButtonName;
+
+  div.append(label);
+  div.append(input);
+
+  form.append(div);
+  form.append(submitButton);
+
+  return form;
 }

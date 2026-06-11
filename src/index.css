@@ -22,12 +22,55 @@ body {
 }
 
 main {
+  width: 70%;
+  height: 90vh;
+  margin: 50px auto;
+  border-radius: 10px;
+  display: flex;
+  gap: 12px;
+}
+
+.projects,
+.todos {
   width: 50%;
-  height: 100vh;
-  margin: 12px auto;
+  padding: 24px;
+  overflow: scroll;
+  scrollbar-width: none;
   background-color: #2e4057;
   border-radius: 10px;
-  padding: 0 24px;
+  color: white;
+}
+
+.projects > button {
+  position: absolute;
+  top: 10px;
+  left: 27.5%;
+  background-color: #2e4057;
+  color: white;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.projects > .empty-message {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: white;
+  font-weight: 600;
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project > button:first-of-type {
+  font-size: 2rem;
+  color: white;
+  background-color: inherit;
 }
 
 button {

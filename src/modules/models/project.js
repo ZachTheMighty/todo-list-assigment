@@ -1,25 +1,19 @@
-export default class Project {
-  #name;
-  #toDos;
-
-  constructor(name) {
-    this.#name = name;
-    this.#toDos = [];
+export default class ProjectModel {
+  constructor() {
+    this.projects = [
+      {
+        name: "Default project",
+        todos: [],
+        id: crypto.randomUUID(),
+      },
+    ];
   }
 
-  getName() {
-    return this.#name;
+  addProject(project) {
+    this.projects.push(project);
   }
 
-  setName(name) {
-    this.#name = name;
-  }
-
-  getToDos() {
-    return this.#toDos;
-  }
-
-  addToDo(toDo) {
-    this.#toDos.push(toDo);
+  removeProject(projectId) {
+    this.projects.splice(projectId, 1);
   }
 }
