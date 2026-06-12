@@ -41,18 +41,24 @@ export default class ToDoView {
     priority.classList.add("priority");
     priority.textContent = todo.priority;
 
+    todo.priority === "low"
+      ? (priority.style.color = "lime")
+      : todo.priority === "medium"
+        ? (priority.style.color = "yellow")
+        : (priority.style.color = "red");
+
     const date = document.createElement("div");
     date.classList.add("date");
     date.textContent = todo.dueDate;
 
     const toDoInfo = document.createElement("div");
-    toDoInfo.append(checkBox, title, priority, date);
+    toDoInfo.append(checkBox, title, date);
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete todo";
 
     const wrapper = document.createElement("div");
-    wrapper.append(toDoInfo, deleteButton);
+    wrapper.append(toDoInfo, priority, deleteButton);
 
     const horizontalLine = document.createElement("hr");
 
