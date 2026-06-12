@@ -45,19 +45,15 @@ export default class ToDoView {
     date.classList.add("date");
     date.textContent = todo.dueDate;
 
+    const toDoInfo = document.createElement("div");
+    toDoInfo.append(checkBox, title, priority, date);
+
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete todo";
 
     const horizontalLine = document.createElement("hr");
 
-    toDoDiv.append(
-      checkBox,
-      title,
-      priority,
-      date,
-      deleteButton,
-      horizontalLine,
-    );
+    toDoDiv.append(toDoInfo, deleteButton, horizontalLine);
 
     this.app.append(toDoDiv);
   }
