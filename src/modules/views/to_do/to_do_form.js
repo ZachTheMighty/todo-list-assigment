@@ -21,6 +21,9 @@ export default function createForm(submitButtonName) {
   labels.push(createLabel("priority"));
   inputs.push(createDropdown("priority"));
 
+  labels.push(createLabel("notes"));
+  inputs.push(createInput("notes"));
+
   for (let i = 0; i < labels.length; i++) {
     divs[i].append(labels[i]);
     divs[i].append(inputs[i]);
