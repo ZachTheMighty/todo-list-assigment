@@ -51,9 +51,12 @@ export default class ToDoView {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete todo";
 
+    const wrapper = document.createElement("div");
+    wrapper.append(toDoInfo, deleteButton);
+
     const horizontalLine = document.createElement("hr");
 
-    toDoDiv.append(toDoInfo, deleteButton, horizontalLine);
+    toDoDiv.append(wrapper, horizontalLine);
 
     this.app.append(toDoDiv);
   }
