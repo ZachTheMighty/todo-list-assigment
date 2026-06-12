@@ -7,6 +7,24 @@ class ToDoController {
     this.view = view;
 
     this.view.render(null);
+
+    this.view.bindAddToDo(() => this.handleAddToDo());
+  }
+
+  handleAddToDo() {
+    const form = this.view.addToDoForm;
+
+    this.model.addToDo({
+      title: form.title.value,
+      description: form.description.value,
+      dueDate: form["due-date"].value,
+      priority: form.priority.value,
+      notes: form.notes.value,
+      belongsTo: form.project.value,
+      id: crypto.randomUUID(),
+    });
+
+    this.view.render(this.model.todos.at(-1));
   }
 }
 
