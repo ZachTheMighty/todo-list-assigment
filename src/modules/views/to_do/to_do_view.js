@@ -52,4 +52,12 @@ export default class ToDoView {
 
     this.app.append(toDoDiv);
   }
+
+  bindAddToDo(handler) {
+    this.addToDoForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      handler();
+      this.addToDoForm.reset();
+    });
+  }
 }
