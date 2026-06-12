@@ -8,10 +8,13 @@ export default function createForm(submitButtonName) {
   const inputs = [];
 
   labels.push(createLabel("title"));
-  inputs.push(createTextInput("title"));
+  inputs.push(createInput("title", "text"));
 
   labels.push(createLabel("description"));
   inputs.push(createTextArea("description"));
+
+  labels.push(createLabel("due-date"));
+  inputs.push(createInput("due-date", "date"));
 
   for (let i = 0; i < labels.length; i++) {
     divs[i].append(labels[i]);
@@ -30,8 +33,9 @@ function createLabel(name) {
   return label;
 }
 
-function createTextInput(name) {
+function createInput(name, type) {
   const input = document.createElement("input");
+  input.type = type;
   input.required = name === "title" ? true : false;
   input.autofocus = name === "title" ? true : false;
   setCommonAttributes(input, name);
