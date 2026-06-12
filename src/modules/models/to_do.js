@@ -1,4 +1,4 @@
-export default class ToDo {
+export default class ToDoModel {
   constructor() {
     this.todos = [
       {
