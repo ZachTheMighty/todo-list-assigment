@@ -82,6 +82,35 @@ main {
   right: 28.5%;
 }
 
+.todo > div {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+}
+
+.todo > div > div {
+  overflow-wrap: break-word;
+  align-self: center;
+}
+
+.title {
+  font-size: 1.2rem;
+}
+
+.priority {
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  font-style: oblique;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
 button {
   border: 0;
   border-radius: 10px;
