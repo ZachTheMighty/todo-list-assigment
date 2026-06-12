@@ -38,7 +38,7 @@ export default class ToDoView {
     const checkBox = createInput(todo.title, "checkbox");
 
     const priority = document.createElement("div");
-    priority.classList("priority");
+    priority.classList.add("priority");
     priority.textContent = todo.priority;
 
     const date = document.createElement("div");
