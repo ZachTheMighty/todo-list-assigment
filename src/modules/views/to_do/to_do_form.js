@@ -1,4 +1,5 @@
 import capitalizeFirst from "./capitalize_first.js";
+import ProjectModel from "../../models/project.js";
 
 export default function createForm(submitButtonName) {
   const form = document.createElement("form");
@@ -19,10 +20,13 @@ export default function createForm(submitButtonName) {
   inputs.push(createInput("due-date", "date"));
 
   labels.push(createLabel("priority"));
-  inputs.push(createDropdown("priority"));
+  inputs.push(createPriorityDropdown("priority"));
 
   labels.push(createLabel("notes"));
   inputs.push(createInput("notes"));
+
+  labels.push(createLabel("project"));
+  inputs.push(createProjectDropdown("project"));
 
   for (let i = 0; i < labels.length; i++) {
     divs[i].append(labels[i]);
@@ -60,13 +64,25 @@ function createTextArea(name) {
   return textArea;
 }
 
-function createDropdown(name) {
+function createPriorityDropdown(name) {
   const dropdown = document.createElement("select");
   setCommonAttributes(dropdown, name);
 
   dropdown.append(createOption("low"));
   dropdown.append(createOption("medium"));
   dropdown.append(createOption("high"));
+
+  return dropdown;
+}
+
+function createProjectDropdown(name) {
+  const dropdown = document.createElement("select");
+  setCommonAttributes(dropdown, name);
+
+  const projects = new ProjectModel().getProjects();
+  projects.forEach((project) => {
+    dropdown.append(createOption(project.name));
+  });
 
   return dropdown;
 }
