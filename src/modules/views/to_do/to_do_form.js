@@ -1,5 +1,3 @@
-import capitalizeFirst from "./capitalize_first.js";
-import ProjectModel from "../../models/project.js";
 import {
   createLabel,
   createInput,
@@ -30,7 +28,7 @@ export default function createForm(submitButtonName) {
   inputs.push(createPriorityDropdown("priority"));
 
   labels.push(createLabel("notes"));
-  inputs.push(createInput("notes"));
+  inputs.push(createInput("notes", "text"));
 
   labels.push(createLabel("project"));
   inputs.push(createProjectDropdown("project"));
