@@ -39,5 +39,11 @@ export default function createForm(submitButtonName) {
 
     form.append(divs[i]);
   }
+
+  const submitButton = document.createElement("button");
+  submitButton.textContent = submitButtonName;
+
+  form.append(submitButton);
+
   return form;
 }
