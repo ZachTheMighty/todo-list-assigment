@@ -51,8 +51,8 @@ export default class ToDoView {
     const horizontalLine = document.createElement("hr");
 
     toDoDiv.append(
-      title,
       checkBox,
+      title,
       priority,
       date,
       deleteButton,
