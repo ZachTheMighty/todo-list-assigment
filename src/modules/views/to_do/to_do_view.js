@@ -16,10 +16,19 @@ export default class ToDoView {
     this.addToDoButton.setAttribute("command", "show-modal");
     this.addToDoButton.setAttribute("commandfor", "add-todo");
 
+    this.emptyMessage = document.createElement("div");
+    this.emptyMessage.classList.add("empty-message");
+    this.emptyMessage.textContent = "You don't have any tasks, what a bum";
+
     this.app.append(this.addToDoButton, this.addToDoDialog);
   }
 
   render(todo) {
+    if (todo === null) {
+      this.app.append(this.emptyMessage);
+      return;
+    } else this.emptyMessage.remove();
+
     const toDoDiv = document.createElement("div");
     toDoDiv.classList.add("todo");
 
