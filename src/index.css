@@ -55,7 +55,7 @@ main {
   left: 27.5%;
 }
 
-.projects > .empty-message {
+.empty-message {
   height: 100%;
   display: flex;
   justify-content: center;
@@ -63,6 +63,7 @@ main {
   font-size: 1.3rem;
   color: white;
   font-weight: 600;
+  opacity: 0.5;
 }
 
 .project {
