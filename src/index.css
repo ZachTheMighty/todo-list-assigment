@@ -41,14 +41,18 @@ main {
   color: white;
 }
 
-.projects > button {
+.projects > button,
+.todos > button {
   position: absolute;
   top: 10px;
-  left: 27.5%;
   background-color: #2e4057;
   color: white;
   font-weight: 600;
   font-size: 1.3rem;
+}
+
+.projects > button {
+  left: 27.5%;
 }
 
 .projects > .empty-message {
@@ -71,6 +75,10 @@ main {
   font-size: 2rem;
   color: white;
   background-color: inherit;
+}
+
+.todos > button {
+  right: 28.5%;
 }
 
 button {

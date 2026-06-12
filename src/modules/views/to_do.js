@@ -1,28 +1,16 @@
-export default function createToDo(
-  title,
-  description,
-  dueDate,
-  priority,
-  notes,
-  isChecked,
-) {
-  const toDoDiv = document.createElement("div");
+import createDialog from "./dialog.js";
 
-  const checkBox = document.createElement("input");
-  checkBox.setAttribute("type", "checkbox");
+export default class ToDoView {
+  constructor() {
+    this.app = document.querySelector(".todos");
 
-  const titleHeader = document.createElement("h2");
-  titleHeader.textContent = title;
+    this.addToDoDialog = createDialog("add-todo", "Add todo");
 
-  const dueDateDiv = document.createElement("div");
-  dueDateDiv.textContent = dueDate;
+    this.addToDoButton = document.createElement("button");
+    this.addToDoButton.textContent = "Add todo";
+    this.addToDoButton.setAttribute("command", "show-modal");
+    this.addToDoButton.setAttribute("commandfor", "add-todo");
 
-  const container = document.createElement("div");
-  container.append(titleHeader);
-  container.append(dueDateDiv);
-
-  toDoDiv.append(checkBox);
-  toDoDiv.append(container);
-
-  return toDoDiv;
+    this.app.append(this.addToDoButton, this.addToDoDialog);
+  }
 }
