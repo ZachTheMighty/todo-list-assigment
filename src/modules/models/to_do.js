@@ -7,8 +7,8 @@ export default class ToDoModel {
         dueDate: "",
         priority: "",
         notes: "",
-        isChecked: false,
         belongsTo: null,
+        isChecked: false,
         id: crypto.randomUUID(),
       },
     ];
