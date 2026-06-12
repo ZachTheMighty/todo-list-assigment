@@ -22,7 +22,7 @@ export default function createForm(submitButtonName) {
 function createLabel(name) {
   const label = document.createElement("label");
   label.textContent = name[0].toUpperCase() + name.slice(1);
-  label.for = name;
+  label.setAttribute("for", name);
 
   return label;
 }
