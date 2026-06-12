@@ -1,5 +1,6 @@
 import createDialog from "../dialog.js";
 import createForm from "./to_do_form.js";
+import { createLabel, createInput } from "./create_widgets.js";
 
 export default class ToDoView {
   constructor() {
@@ -16,5 +17,39 @@ export default class ToDoView {
     this.addToDoButton.setAttribute("commandfor", "add-todo");
 
     this.app.append(this.addToDoButton, this.addToDoDialog);
+  }
+
+  render(todo) {
+    const toDoDiv = document.createElement("div");
+    toDoDiv.classList.add("todo");
+
+    const title = createLabel(todo.title);
+    title.classList.add("title");
+
+    const checkBox = createInput(todo.title, "checkbox");
+
+    const priority = document.createElement("div");
+    priority.classList("priority");
+    priority.textContent = todo.priority;
+
+    const date = document.createElement("div");
+    date.classList.add("date");
+    date.textContent = todo.dueDate;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete todo";
+
+    const horizontalLine = document.createElement("hr");
+
+    toDoDiv.append(
+      title,
+      checkBox,
+      priority,
+      date,
+      deleteButton,
+      horizontalLine,
+    );
+
+    this.app.append(toDoDiv);
   }
 }
