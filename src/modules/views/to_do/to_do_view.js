@@ -1,4 +1,4 @@
-import createDialog from "./dialog.js";
+import createDialog from "../dialog.js";
 
 export default class ToDoView {
   constructor() {

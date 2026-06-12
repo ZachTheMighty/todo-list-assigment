@@ -1,4 +1,4 @@
-import createDialog from "./dialog.js";
+import createDialog from "../dialog.js";
 import createForm from "./project_form.js";
 
 export default class ProjectView {
