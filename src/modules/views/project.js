@@ -5,9 +5,9 @@ export default class ProjectView {
   constructor() {
     this.app = document.querySelector(".projects");
 
-    this.createProjectDialog = createDialog("add-project", "Add project");
+    this.addProjectDialog = createDialog("add-project", "Add project");
     this.createProjectForm = createForm("Add project");
-    this.createProjectDialog.append(this.createProjectForm);
+    this.addProjectDialog.append(this.createProjectForm);
 
     this.renameProjectDialog = createDialog("rename-project", "Rename project");
     this.renameProjectForm = createForm("Rename project");
@@ -22,7 +22,7 @@ export default class ProjectView {
 
     this.app.append(
       this.addProjectButton,
-      this.createProjectDialog,
+      this.addProjectDialog,
       this.renameProjectDialog,
     );
   }
