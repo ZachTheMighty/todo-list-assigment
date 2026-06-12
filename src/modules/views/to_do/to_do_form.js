@@ -29,11 +29,15 @@ function createLabel(name) {
 
 function createTextInput(name) {
   const input = document.createElement("input");
-  input.id = name;
-  input.name = name;
-  input.autocomplete = "off";
   input.required = name === "title" ? true : false;
   input.autofocus = name === "title" ? true : false;
+  setCommonAttributes(input, name);
 
   return input;
+}
+
+function setCommonAttributes(widget, name) {
+  widget.id = name;
+  widget.name = name;
+  widget.autocomplete = "off";
 }
