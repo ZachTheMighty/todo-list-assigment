@@ -55,10 +55,10 @@ function createInput(name, type) {
   return input;
 }
 
-function createTextArea(name) {
+function createTextArea(name, cols, rows) {
   const textArea = document.createElement("textarea");
-  textArea.cols = "10";
-  textArea.rows = "3";
+  textArea.cols = cols;
+  textArea.rows = rows;
   setCommonAttributes(textArea, name);
 
   return textArea;
