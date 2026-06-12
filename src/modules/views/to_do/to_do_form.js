@@ -1,3 +1,5 @@
+import capitalizeFirst from "./capitalize_first.js";
+
 export default function createForm(submitButtonName) {
   const form = document.createElement("form");
 
@@ -16,6 +18,9 @@ export default function createForm(submitButtonName) {
   labels.push(createLabel("due-date"));
   inputs.push(createInput("due-date", "date"));
 
+  labels.push(createLabel("priority"));
+  inputs.push(createDropdown("priority"));
+
   for (let i = 0; i < labels.length; i++) {
     divs[i].append(labels[i]);
     divs[i].append(inputs[i]);
@@ -27,7 +32,7 @@ export default function createForm(submitButtonName) {
 
 function createLabel(name) {
   const label = document.createElement("label");
-  label.textContent = name[0].toUpperCase() + name.slice(1);
+  label.textContent = capitalizeFirst(name);
   label.setAttribute("for", name);
 
   return label;
@@ -50,6 +55,24 @@ function createTextArea(name) {
   setCommonAttributes(textArea, name);
 
   return textArea;
+}
+
+function createDropdown(name) {
+  const dropdown = document.createElement("select");
+  setCommonAttributes(dropdown, name);
+
+  dropdown.append(createOption("low"));
+  dropdown.append(createOption("medium"));
+  dropdown.append(createOption("high"));
+
+  return dropdown;
+}
+
+function createOption(value) {
+  const option = document.createElement("option");
+  option.textContent = capitalizeFirst(value);
+  option.value = value;
+  return option;
 }
 
 function setCommonAttributes(widget, name) {
