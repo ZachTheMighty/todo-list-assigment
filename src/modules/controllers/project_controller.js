@@ -1,5 +1,5 @@
-import ProjectModel from "./models/project.js";
-import ProjectView from "./views/project.js";
+import ProjectModel from "../models/project.js";
+import ProjectView from "../views/project.js";
 
 class ProjectController {
   constructor(model, view) {
