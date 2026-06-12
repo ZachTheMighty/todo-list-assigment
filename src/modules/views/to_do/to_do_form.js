@@ -10,6 +10,9 @@ export default function createForm(submitButtonName) {
   labels.push(createLabel("title"));
   inputs.push(createTextInput("title"));
 
+  labels.push(createLabel("description"));
+  inputs.push(createTextArea("description"));
+
   for (let i = 0; i < labels.length; i++) {
     divs[i].append(labels[i]);
     divs[i].append(inputs[i]);
@@ -34,6 +37,15 @@ function createTextInput(name) {
   setCommonAttributes(input, name);
 
   return input;
+}
+
+function createTextArea(name) {
+  const textArea = document.createElement("textarea");
+  textArea.cols = "10";
+  textArea.rows = "3";
+  setCommonAttributes(textArea, name);
+
+  return textArea;
 }
 
 function setCommonAttributes(widget, name) {
