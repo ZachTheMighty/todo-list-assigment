@@ -9,10 +9,6 @@ export default class ProjectModel {
     ];
   }
 
-  getProjects() {
-    return this.projects;
-  }
-
   addProject(project) {
     this.projects.push(project);
   }

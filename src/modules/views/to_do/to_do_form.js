@@ -79,7 +79,7 @@ function createProjectDropdown(name) {
   const dropdown = document.createElement("select");
   setCommonAttributes(dropdown, name);
 
-  const projects = new ProjectModel().getProjects();
+  const projects = new ProjectModel().projects;
   projects.forEach((project) => {
     dropdown.append(createOption(project.name));
   });
