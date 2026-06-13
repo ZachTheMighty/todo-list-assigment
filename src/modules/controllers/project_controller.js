@@ -1,13 +1,22 @@
 import ProjectModel from "../models/project.js";
 import ProjectView from "../views/project/project_view.js";
 import { AddProjectToDropDown } from "../views/to_do/create_widgets.js";
+import { renameProjectInDropdown } from "../views/to_do/create_widgets.js";
 
 class ProjectController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
 
-    this.view.render(this.model.projects[0]);
+    this.defaultProject = {
+      name: "Default project",
+      todos: [],
+      id: crypto.randomUUID(),
+    };
+
+    this.model.addProject(this.defaultProject);
+    console.log(this.model.getProjects());
+    this.view.render(this.defaultProject);
 
     this.view.bindAddProject(() => this.handleAddProject());
     this.view.bindRenameProject((project) => this.handleRenameProject(project));
@@ -38,13 +47,20 @@ class ProjectController {
 
   handleRenameProject(project) {
     project.textContent = this.view.renameProjectForm.name.value;
+    let projectObject;
+
     for (let i = 0; i < this.model.projects.length; i++) {
       if (
         project.nextElementSibling.getAttribute("data-id") ===
         this.model.projects[i].id
-      )
+      ) {
         this.model.projects[i].name = this.view.renameProjectForm.name.value;
+        projectObject = this.model.projects[i];
+      }
     }
+
+    renameProjectInDropdown(projectObject);
+
     console.log(this.model.projects);
   }
 
@@ -66,4 +82,4 @@ class ProjectController {
   }
 }
 
-export default new ProjectController(new ProjectModel(), new ProjectView());
+export default new ProjectController(ProjectModel, new ProjectView());
