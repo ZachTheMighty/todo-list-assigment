@@ -56,6 +56,12 @@ export function createOption(textContent, value) {
   return option;
 }
 
+export function AddProjectToDropDown(project) {
+  const dropdown = document.querySelector("select#project");
+
+  dropdown.append(createOption(project.name, project.id));
+}
+
 export function setCommonAttributes(widget, name) {
   widget.id = name;
   widget.name = name;

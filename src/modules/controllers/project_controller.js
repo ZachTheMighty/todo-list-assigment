@@ -1,5 +1,6 @@
 import ProjectModel from "../models/project.js";
 import ProjectView from "../views/project/project_view.js";
+import { AddProjectToDropDown } from "../views/to_do/create_widgets.js";
 
 class ProjectController {
   constructor(model, view) {
@@ -19,7 +20,12 @@ class ProjectController {
       todos: [],
       id: crypto.randomUUID(),
     });
-    this.view.render(this.model.projects.at(-1));
+
+    const lastestProject = this.model.projects.at(-1);
+
+    this.view.render(lastestProject);
+
+    AddProjectToDropDown(lastestProject);
 
     this.model.projects.forEach((project) => console.log(project));
 
