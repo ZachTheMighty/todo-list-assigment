@@ -43,10 +43,8 @@ export function createProjectDropdown(name) {
   const dropdown = document.createElement("select");
   setCommonAttributes(dropdown, name);
 
-  const projects = ProjectModel.getProjects();
-  projects.forEach((project) => {
-    dropdown.append(createOption(project.name, project.id));
-  });
+  const defaultProject = ProjectModel.getProjects()[0];
+  dropdown.append(createOption(defaultProject.name, defaultProject.id));
 
   return dropdown;
 }
