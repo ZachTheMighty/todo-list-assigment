@@ -1,6 +1,8 @@
 import createDialog from "../dialog.js";
 import createForm from "./project_form.js";
 
+import deleteIcon from "../../../assets/icons/trash-can-outline.svg";
+
 export default class ProjectView {
   constructor() {
     this.app = document.querySelector(".projects");
@@ -39,9 +41,9 @@ export default class ProjectView {
     projectName.setAttribute("command", "show-modal");
     projectName.setAttribute("commandfor", "rename-project");
 
-    const deleteProjectButton = document.createElement("button");
+    const deleteProjectButton = document.createElement("img");
+    deleteProjectButton.src = deleteIcon;
     deleteProjectButton.classList.add("delete-project");
-    deleteProjectButton.textContent = "Delete project";
     deleteProjectButton.setAttribute("data-id", project.id);
 
     this.deleteProjectButtons.push(deleteProjectButton);
