@@ -39,14 +39,20 @@ export function createPriorityDropdown(name) {
   return dropdown;
 }
 
+class Dropdown {
+  static dropdown = document.createElement("select");
+}
+
 export function createProjectDropdown(name) {
-  const dropdown = document.createElement("select");
-  setCommonAttributes(dropdown, name);
+  setCommonAttributes(Dropdown.dropdown, name);
 
   const defaultProject = ProjectModel.getProjects()[0];
-  dropdown.append(createOption(defaultProject.name, defaultProject.id));
+  console.log(defaultProject);
+  Dropdown.dropdown.append(
+    createOption(defaultProject.name, defaultProject.id),
+  );
 
-  return dropdown;
+  return Dropdown.dropdown;
 }
 
 export function createOption(textContent, value) {
@@ -57,9 +63,15 @@ export function createOption(textContent, value) {
 }
 
 export function AddProjectToDropDown(project) {
-  const dropdown = document.querySelector("select#project");
+  Dropdown.dropdown.append(createOption(project.name, project.id));
+}
 
-  dropdown.append(createOption(project.name, project.id));
+export function renameProjectInDropdown(project) {
+  for (const option of Dropdown.dropdown.childNodes)
+    if (option.value === project.id) {
+      option.textContent = project.name;
+      console.log(option.value);
+    }
 }
 
 export function setCommonAttributes(widget, name) {
