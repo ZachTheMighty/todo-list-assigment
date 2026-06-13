@@ -1,5 +1,6 @@
 import ToDoModel from "../models/to_do.js";
 import ToDoView from "../views/to_do/to_do_view.js";
+import ProjectModel from "../models/project.js";
 
 class ToDoController {
   constructor(model, view) {
@@ -24,7 +25,14 @@ class ToDoController {
       id: crypto.randomUUID(),
     });
 
-    this.view.render(this.model.todos.at(-1));
+    const lastToDo = this.model.todos.at(-1);
+    const projects = ProjectModel.getProjects();
+
+    projects.forEach((project) => {
+      if (project.id === lastToDo.id) project.todos.push(lastToDo);
+    });
+
+    this.view.render(lastToDo);
   }
 }
 
