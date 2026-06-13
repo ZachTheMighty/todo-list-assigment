@@ -2,6 +2,7 @@ import ProjectModel from "../models/project.js";
 import ProjectView from "../views/project/project_view.js";
 import { AddProjectToDropDown } from "../views/to_do/create_widgets.js";
 import { renameProjectInDropdown } from "../views/to_do/create_widgets.js";
+import { deleteProjectInDropdown } from "../views/to_do/create_widgets.js";
 
 class ProjectController {
   constructor(model, view) {
@@ -69,6 +70,7 @@ class ProjectController {
       if (this.model.projects[i].id === id) {
         this.model.removeProject(i);
         this.view.deleteProject(id);
+        deleteProjectInDropdown(id);
       }
     }
     console.log(this.model.projects);

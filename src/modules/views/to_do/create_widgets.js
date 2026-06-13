@@ -74,6 +74,11 @@ export function renameProjectInDropdown(project) {
     }
 }
 
+export function deleteProjectInDropdown(projectId) {
+  for (const option of Dropdown.dropdown.childNodes)
+    if (option.value === projectId) option.remove();
+}
+
 export function setCommonAttributes(widget, name) {
   widget.id = name;
   widget.name = name;
