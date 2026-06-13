@@ -80,9 +80,17 @@ main {
   width: 30px;
 }
 
-.edit-project {
+button:has(img) {
+  background-color: inherit;
+  padding: 0;
+}
+
+button:has(img) {
   position: absolute;
   width: 20px;
+  height: 20px;
+  top: -10px;
+  right: -25px;
 }
 
 .project > button:first-of-type {
