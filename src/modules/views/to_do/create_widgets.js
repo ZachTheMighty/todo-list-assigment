@@ -32,9 +32,9 @@ export function createPriorityDropdown(name) {
   const dropdown = document.createElement("select");
   setCommonAttributes(dropdown, name);
 
-  dropdown.append(createOption("low"));
-  dropdown.append(createOption("medium"));
-  dropdown.append(createOption("high"));
+  dropdown.append(createOption("low", "low"));
+  dropdown.append(createOption("medium", "medium"));
+  dropdown.append(createOption("high", "high"));
 
   return dropdown;
 }
@@ -45,15 +45,15 @@ export function createProjectDropdown(name) {
 
   const projects = ProjectModel.getProjects();
   projects.forEach((project) => {
-    dropdown.append(createOption(project.name));
+    dropdown.append(createOption(project.name, project.id));
   });
 
   return dropdown;
 }
 
-export function createOption(value) {
+export function createOption(textContent, value) {
   const option = document.createElement("option");
-  option.textContent = capitalizeFirst(value);
+  option.textContent = capitalizeFirst(textContent);
   option.value = value;
   return option;
 }
