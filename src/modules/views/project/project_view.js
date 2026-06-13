@@ -2,6 +2,7 @@ import createDialog from "../dialog.js";
 import createForm from "./project_form.js";
 
 import deleteIcon from "../../../assets/icons/trash-can-outline.svg";
+import editIcon from "../../../assets/icons/pencil-outline.svg";
 
 export default class ProjectView {
   constructor() {
@@ -36,10 +37,14 @@ export default class ProjectView {
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
 
-    const projectName = document.createElement("button");
+    const projectName = document.createElement("h1");
     projectName.textContent = project.name;
-    projectName.setAttribute("command", "show-modal");
-    projectName.setAttribute("commandfor", "rename-project");
+
+    const editIconButton = document.createElement("img");
+    editIconButton.src = editIcon;
+    editIconButton.classList.add("edit-project");
+    editIconButton.setAttribute("command", "show-modal");
+    editIconButton.setAttribute("commandfor", "rename-project");
 
     const deleteProjectButton = document.createElement("img");
     deleteProjectButton.src = deleteIcon;
@@ -48,7 +53,7 @@ export default class ProjectView {
 
     this.deleteProjectButtons.push(deleteProjectButton);
 
-    projectDiv.append(projectName, deleteProjectButton);
+    projectDiv.append(projectName, editIconButton, deleteProjectButton);
 
     const breakLine = document.createElement("hr");
 
