@@ -38,7 +38,9 @@ export default class ProjectView {
     projectDiv.classList.add("project");
 
     const projectHeader = document.createElement("div");
-    projectHeader.textContent = project.name;
+
+    const projectName = document.createElement("h1");
+    projectName.textContent = project.name;
 
     const editIconImage = document.createElement("img");
     editIconImage.src = editIcon;
@@ -57,7 +59,7 @@ export default class ProjectView {
 
     this.deleteProjectButtons.push(deleteProjectButton);
 
-    projectHeader.append(editIconButton);
+    projectHeader.append(projectName, editIconButton);
 
     projectDiv.append(projectHeader, deleteProjectButton);
 
@@ -91,7 +93,8 @@ export default class ProjectView {
     let projectToBeRenamed = null;
 
     this.renameProjectDialog.addEventListener("command", (event) => {
-      if (event.command === "show-modal") projectToBeRenamed = event.source;
+      if (event.command === "show-modal")
+        projectToBeRenamed = event.source.previousElementSibling;
     });
 
     this.renameProjectForm.addEventListener("submit", (e) => {
