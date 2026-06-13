@@ -52,7 +52,7 @@ class ProjectController {
 
     for (let i = 0; i < this.model.projects.length; i++) {
       if (
-        project.nextElementSibling.getAttribute("data-id") ===
+        project.parentElement.nextElementSibling.getAttribute("data-id") ===
         this.model.projects[i].id
       ) {
         this.model.projects[i].name = this.view.renameProjectForm.name.value;
