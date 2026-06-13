@@ -37,8 +37,8 @@ export default class ProjectView {
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
 
-    const projectName = document.createElement("h1");
-    projectName.textContent = project.name;
+    const projectHeader = document.createElement("h1");
+    projectHeader.textContent = project.name;
 
     const editIconImage = document.createElement("img");
     editIconImage.src = editIcon;
@@ -57,9 +57,9 @@ export default class ProjectView {
 
     this.deleteProjectButtons.push(deleteProjectButton);
 
-    projectName.append(editIconButton);
+    projectHeader.append(editIconButton);
 
-    projectDiv.append(projectName, deleteProjectButton);
+    projectDiv.append(projectHeader, deleteProjectButton);
 
     const breakLine = document.createElement("hr");
 
