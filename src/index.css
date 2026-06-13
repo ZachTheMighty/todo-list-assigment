@@ -72,6 +72,10 @@ main {
   align-items: center;
 }
 
+.project > .delete-project {
+  width: 30px;
+}
+
 .project > button:first-of-type {
   font-size: 2rem;
   color: white;
