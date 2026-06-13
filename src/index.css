@@ -93,6 +93,10 @@ button:has(img) {
   right: -30px;
 }
 
+img:hover {
+  opacity: 0.5;
+}
+
 .project > button:first-of-type {
   font-size: 2rem;
   color: white;
