@@ -40,11 +40,15 @@ export default class ProjectView {
     const projectName = document.createElement("h1");
     projectName.textContent = project.name;
 
-    const editIconButton = document.createElement("img");
-    editIconButton.src = editIcon;
-    editIconButton.classList.add("edit-project");
+    const editIconImage = document.createElement("img");
+    editIconImage.src = editIcon;
+    editIconImage.classList.add("edit-project");
+
+    const editIconButton = document.createElement("button");
     editIconButton.setAttribute("command", "show-modal");
     editIconButton.setAttribute("commandfor", "rename-project");
+
+    editIconButton.append(editIconImage);
 
     const deleteProjectButton = document.createElement("img");
     deleteProjectButton.src = deleteIcon;
