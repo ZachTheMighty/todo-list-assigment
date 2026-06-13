@@ -1,23 +1,15 @@
 export default class ProjectModel {
-  constructor() {
-    this.projects = [
-      {
-        name: "Default project",
-        todos: [],
-        id: crypto.randomUUID(),
-      },
-    ];
-  }
+  static projects = [];
 
   static getProjects() {
-    return new ProjectModel().projects;
+    return ProjectModel.projects;
   }
 
-  addProject(project) {
-    this.projects.push(project);
+  static addProject(project) {
+    ProjectModel.projects.push(project);
   }
 
-  removeProject(projectId) {
-    this.projects.splice(projectId, 1);
+  static removeProject(projectId) {
+    ProjectModel.projects.splice(projectId, 1);
   }
 }
