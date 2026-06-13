@@ -72,8 +72,17 @@ main {
   align-items: center;
 }
 
-.project > .delete-project {
+.project > h1 {
+  position: relative;
+}
+
+.delete-project {
   width: 30px;
+}
+
+.edit-project {
+  position: absolute;
+  width: 20px;
 }
 
 .project > button:first-of-type {
