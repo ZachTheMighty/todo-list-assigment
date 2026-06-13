@@ -29,7 +29,10 @@ class ToDoController {
     const projects = ProjectModel.getProjects();
 
     projects.forEach((project) => {
-      if (project.id === lastToDo.id) project.todos.push(lastToDo);
+      if (project.id === lastToDo.belongsTo) {
+        project.todos.push(lastToDo);
+        console.log(project);
+      }
     });
 
     this.view.render(lastToDo);
