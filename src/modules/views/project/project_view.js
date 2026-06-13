@@ -53,7 +53,9 @@ export default class ProjectView {
 
     this.deleteProjectButtons.push(deleteProjectButton);
 
-    projectDiv.append(projectName, editIconButton, deleteProjectButton);
+    projectName.append(editIconButton);
+
+    projectDiv.append(projectName, deleteProjectButton);
 
     const breakLine = document.createElement("hr");
 
