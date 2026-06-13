@@ -37,7 +37,7 @@ export default class ProjectView {
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
 
-    const projectHeader = document.createElement("h1");
+    const projectHeader = document.createElement("div");
     projectHeader.textContent = project.name;
 
     const editIconImage = document.createElement("img");
