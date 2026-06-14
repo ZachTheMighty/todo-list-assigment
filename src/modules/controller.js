@@ -136,11 +136,9 @@ class Controller {
     projects.forEach((project) => {
       if (project.id === lastToDo.belongsTo) {
         project.todos.push(lastToDo);
-        console.log(project);
+        if (project.selected) this.todoView.render(lastToDo);
       }
     });
-
-    this.todoView.render(lastToDo);
   }
 }
 
