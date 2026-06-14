@@ -47,6 +47,12 @@ class Controller {
         this.handleDeleteProject(button.getAttribute("data-id")),
       );
     });
+
+    this.projectView.projectHeaders.forEach((projectHeader) => {
+      projectHeader.addEventListener("click", () =>
+        this.handleDisplayTodos(projectHeader),
+      );
+    });
   }
 
   handleRenameProject(project) {
@@ -85,6 +91,27 @@ class Controller {
       if (this.projectView.deleteProjectButtons.getAttribute("data-id") === id)
         this.projectView.deleteProjectButtons.splice(i, 1);
     }
+  }
+
+  handleDisplayTodos(projectHeader) {
+    let projectHeaderObject;
+
+    this.todoView.app.textContent = "";
+    this.todoView.app.append(this.todoView.addToDoButton);
+    this.todoView.app.append(this.todoView.addToDoDialog);
+
+    for (let i = 0; i < ProjectModel.projects.length; i++) {
+      if (
+        projectHeader.nextElementSibling.getAttribute("data-id") ===
+        ProjectModel.projects[i].id
+      )
+        projectHeaderObject = ProjectModel.projects[i];
+    }
+
+    if (projectHeaderObject.todos.length === 0) this.todoView.render(null);
+
+    for (let i = 0; i < projectHeaderObject.todos.length; i++)
+      this.todoView.render(projectHeaderObject.todos[i]);
   }
 
   handleAddToDo() {
