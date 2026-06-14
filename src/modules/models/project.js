@@ -2,6 +2,7 @@ export default class ProjectModel {
   constructor() {
     this.defaultProject = {
       name: "Default project",
+      selected: true,
       todos: [],
       id: crypto.randomUUID(),
     };
@@ -13,6 +14,14 @@ export default class ProjectModel {
 
   static getProjects() {
     return ProjectModel.projects;
+  }
+
+  static selectProject(projectSelected) {
+    ProjectModel.projects.forEach((project) =>
+      projectSelected === project
+        ? (project.selected = true)
+        : (project.selected = false),
+    );
   }
 
   static addProject(project) {
