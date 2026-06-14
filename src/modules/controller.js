@@ -30,6 +30,7 @@ class Controller {
   handleAddProject() {
     ProjectModel.addProject({
       name: this.projectView.createProjectForm.name.value,
+      selected: false,
       todos: [],
       id: crypto.randomUUID(),
     });
@@ -107,6 +108,8 @@ class Controller {
       )
         projectHeaderObject = ProjectModel.projects[i];
     }
+
+    ProjectModel.selectProject(projectHeaderObject);
 
     if (projectHeaderObject.todos.length === 0) this.todoView.render(null);
 
