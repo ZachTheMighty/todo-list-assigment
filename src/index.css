@@ -72,6 +72,10 @@ main {
   align-items: center;
 }
 
+.selected {
+  opacity: 0.5;
+}
+
 .project > div {
   position: relative;
 }

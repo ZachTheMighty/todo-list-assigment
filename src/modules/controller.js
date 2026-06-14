@@ -102,12 +102,23 @@ class Controller {
         projectHeaderObject = ProjectModel.projects[i];
     }
 
-    ProjectModel.selectProject(projectHeaderObject);
+    this.selectProject(projectHeaderObject, projectHeader);
 
     if (projectHeaderObject.todos.length === 0) this.todoView.render(null);
 
     for (let i = 0; i < projectHeaderObject.todos.length; i++)
       this.todoView.render(projectHeaderObject.todos[i]);
+  }
+
+  selectProject(object, dom) {
+    ProjectModel.selectProject(object);
+
+    for (const project of this.projectView.app.childNodes) {
+      if (project.classList.contains("project"))
+        project.firstChild === dom
+          ? project.firstChild.classList.add("selected")
+          : project.firstChild.classList.remove("selected");
+    }
   }
 
   handleAddToDo() {
