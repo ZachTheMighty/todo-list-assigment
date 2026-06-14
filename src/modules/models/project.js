@@ -1,4 +1,14 @@
 export default class ProjectModel {
+  constructor() {
+    this.defaultProject = {
+      name: "Default project",
+      todos: [],
+      id: crypto.randomUUID(),
+    };
+
+    ProjectModel.addProject(this.defaultProject);
+  }
+
   static projects = [];
 
   static getProjects() {
