@@ -92,9 +92,7 @@ class Controller {
   handleDisplayTodos(projectHeader) {
     let projectHeaderObject;
 
-    this.todoView.app.textContent = "";
-    this.todoView.app.append(this.todoView.addToDoButton);
-    this.todoView.app.append(this.todoView.addToDoDialog);
+    this.todoView.emptyApp();
 
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       if (

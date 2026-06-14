@@ -67,6 +67,12 @@ export default class ToDoView {
     this.app.append(toDoDiv);
   }
 
+  emptyApp() {
+    this.app.textContent = "";
+    this.app.append(this.addToDoButton);
+    this.app.append(this.addToDoDialog);
+  }
+
   bindAddToDo(handler) {
     this.addToDoForm.addEventListener("submit", (event) => {
       event.preventDefault();
