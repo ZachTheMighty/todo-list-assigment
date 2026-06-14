@@ -47,7 +47,6 @@ export function createProjectDropdown(name) {
   setCommonAttributes(Dropdown.dropdown, name);
 
   const defaultProject = ProjectModel.getProjects()[0];
-  console.log(defaultProject);
   Dropdown.dropdown.append(
     createOption(defaultProject.name, defaultProject.id),
   );
@@ -70,7 +69,6 @@ export function renameProjectInDropdown(project) {
   for (const option of Dropdown.dropdown.childNodes)
     if (option.value === project.id) {
       option.textContent = project.name;
-      console.log(option.value);
     }
 }
 
