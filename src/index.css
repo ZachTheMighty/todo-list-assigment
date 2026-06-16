@@ -67,7 +67,8 @@ main {
   opacity: 0.5;
 }
 
-.project {
+.project,
+.todo > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -124,13 +125,12 @@ hr {
   margin: 0;
 }
 
-.todos > button {
-  right: 28.5%;
+.todo > div {
+  padding: 21px 0;
 }
 
-.todo > div {
-  display: grid;
-  grid-template-columns: repeat(3, 33%);
+.todos > button {
+  right: 28.5%;
 }
 
 .todo > div > div {
