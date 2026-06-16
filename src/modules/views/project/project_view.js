@@ -42,7 +42,6 @@ export default class ProjectView {
 
     const projectHeader = document.createElement("div");
 
-
     const projectName = document.createElement("h1");
     projectName.textContent = project.name;
 
@@ -110,8 +109,9 @@ export default class ProjectView {
 
   bindDeleteProject(handler) {
     const defaultDeleteButton = document.querySelector(".delete-project");
-    defaultDeleteButton.addEventListener("click", () =>
-      handler(defaultDeleteButton),
-    );
+    defaultDeleteButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      handler(defaultDeleteButton);
+    });
   }
 }

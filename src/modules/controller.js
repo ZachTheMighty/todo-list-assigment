@@ -44,14 +44,20 @@ class Controller {
 
     this.projectView.render(lastestProject);
 
-    this.selectProject(lastestProject, this.getCorrespondingObject(lastestProject));
+    this.selectProject(
+      lastestProject,
+      this.getCorrespondingObject(lastestProject),
+    );
     this.todoView.emptyApp();
     this.todoView.render(null);
 
     AddProjectToDropDown(lastestProject);
 
     this.projectView.deleteProjectButtons.forEach((button) => {
-      button.addEventListener("click", () => this.handleDeleteProject(button));
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.handleDeleteProject(button);
+      });
     });
 
     this.projectView.projectDivs.forEach((projectDiv) => {
@@ -85,38 +91,32 @@ class Controller {
       if (ProjectModel.projects[i].id === id) {
         let nextProject, previousProject;
 
-        try
-        {
-          nextProject = deleteProjectButton.parentElement.nextElementSibling.nextElementSibling;
-          previousProject = deleteProjectButton.parentElement.previousElementSibling.previousElementSibling;
+        try {
+          nextProject =
+            deleteProjectButton.parentElement.nextElementSibling
+              .nextElementSibling;
+          previousProject =
+            deleteProjectButton.parentElement.previousElementSibling
+              .previousElementSibling;
+        } catch (error) {
+          if (error.message.includes(next)) nextProject = null;
+          if (error.message.includes(previous)) previousProject = null;
         }
 
-        catch(error)
-        {
-          if(error.message.includes(next)) nextProject = null;
-          if(error.message.includes(previous)) previousProject = null;
-        }
-
-        if (ProjectModel.projects.length > 1)
-        {
-
-        if(this.isMiddleProject(nextProject, previousProject))
-          this.handleDisplayTodos(nextProject.firstChild);
-
-        else if(this.isLastProject(nextProject, previousProject))
-          this.handleDisplayTodos(previousProject.firstChild);
-
-        else
+        if (ProjectModel.projects.length > 1) {
+          if (this.isMiddleProject(nextProject, previousProject))
+            this.handleDisplayTodos(nextProject.firstChild);
+          else if (this.isLastProject(nextProject, previousProject))
+            this.handleDisplayTodos(previousProject.firstChild);
+          else
             this.handleDisplayTodos(
               document.querySelector(".project").nextElementSibling
                 .nextElementSibling.firstChild,
             );
+        } else {
+          this.todoView.emptyApp();
+          this.todoView.render(null);
         }
-
-          else {
-            this.todoView.emptyApp();
-            this.todoView.render(null);
-          }
 
         ProjectModel.removeProject(i);
         this.projectView.deleteProject(id);
@@ -125,49 +125,28 @@ class Controller {
     }
   }
 
-  isMiddleProject(next, previous)
-  {
-    try
-    {
-
+  isMiddleProject(next, previous) {
+    try {
       if (
-          next.classList.contains(
-          "project",
-          ) &&
-          previous.classList.contains(
-          "project",
-          )
-        ) return true;
-    }
-
-    catch(error)
-    {
+        next.classList.contains("project") &&
+        previous.classList.contains("project")
+      )
+        return true;
+    } catch (error) {
       return false;
     }
 
     return false;
   }
 
-  isLastProject(next, previous)
-  {
-    try
-    {
-
-      if (
-          next === null
-           &&
-          previous.classList.contains(
-          "project",
-          )
-        )return true;
-    }
-
-    catch(error)
-    {
+  isLastProject(next, previous) {
+    try {
+      if (next === null && previous.classList.contains("project")) return true;
+    } catch (error) {
       return false;
     }
 
-      return false;
+    return false;
   }
 
   removeDeleteButton(id) {
