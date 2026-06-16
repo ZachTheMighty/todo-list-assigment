@@ -23,6 +23,8 @@ export default class ToDoView {
     this.emptyMessage.classList.add("empty-message");
     this.emptyMessage.textContent = "You don't have any tasks, what a bum";
 
+    this.deleteToDoButtons = [];
+
     this.app.append(this.addToDoButton, this.addToDoDialog);
   }
 
@@ -60,6 +62,8 @@ export default class ToDoView {
     const deleteButton = document.createElement("img");
     deleteButton.src = deleteIcon;
     deleteButton.classList.add("delete-todo");
+
+    this.deleteToDoButtons.push(deleteButton);
 
     const wrapper = document.createElement("div");
     wrapper.append(toDoInfo, priority, deleteButton);

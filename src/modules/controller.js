@@ -220,6 +220,13 @@ class Controller {
         if (project.selected) this.todoView.render(lastToDo);
       }
     });
+
+    this.todoView.deleteProjectButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.handleDeleteToDo(button);
+      });
+    });
   }
 }
 
