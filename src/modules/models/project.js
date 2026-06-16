@@ -32,7 +32,7 @@ export default class ProjectModel {
     ProjectModel.projects.splice(projectId, 1);
   }
 
-  static isProjectsEmpty() {
+  static isEmpty() {
     return projects.length === 0 ? true : false;
   }
 }
