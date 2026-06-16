@@ -79,10 +79,11 @@ class Controller {
     const id = deleteProjectButton.getAttribute("data-id");
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       if (ProjectModel.projects[i].id === id) {
-        this.handleDisplayTodos(
-          document.querySelector(".project").nextElementSibling
-            .nextElementSibling.firstChild,
-        );
+        if (ProjectModel.projects.length > 1)
+          this.handleDisplayTodos(
+            document.querySelector(".project").nextElementSibling
+              .nextElementSibling.firstChild,
+          );
 
         ProjectModel.removeProject(i);
         this.projectView.deleteProject(id);
