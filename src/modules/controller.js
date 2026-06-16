@@ -26,6 +26,9 @@ class Controller {
       this.handleRenameProject(project),
     );
     this.projectView.bindDeleteProject((id) => this.handleDeleteProject(id));
+    this.projectView.bindDisplayToDos((projectDiv) =>
+      this.handleDisplayTodos(projectDiv.firstChild),
+    );
 
     this.todoView.render(null);
 
@@ -52,12 +55,6 @@ class Controller {
     this.todoView.render(null);
 
     AddProjectToDropDown(lastestProject);
-
-    this.projectView.projectDivs.forEach((projectDiv) => {
-      projectDiv.addEventListener("click", () =>
-        this.handleDisplayTodos(projectDiv.firstChild),
-      );
-    });
   }
 
   handleRenameProject(project) {

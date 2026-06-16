@@ -21,8 +21,6 @@ export default class ProjectView {
     this.addProjectButton.setAttribute("command", "show-modal");
     this.addProjectButton.setAttribute("commandfor", "add-project");
 
-    this.projectDivs = [];
-
     this.app.append(
       this.addProjectButton,
       this.addProjectDialog,
@@ -36,8 +34,6 @@ export default class ProjectView {
 
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
-
-    this.projectDivs.push(projectDiv);
 
     const projectHeader = document.createElement("div");
 
@@ -93,6 +89,13 @@ export default class ProjectView {
     this.app.addEventListener("click", (event) => {
       const deleteProjectButton = event.target.closest(".delete-project");
       if (deleteProjectButton) handler(deleteProjectButton);
+    });
+  }
+
+  bindDisplayToDos(handler) {
+    this.app.addEventListener("click", (event) => {
+      const projectDiv = event.target.closest(".project");
+      if (projectDiv) handler(projectDiv);
     });
   }
 
