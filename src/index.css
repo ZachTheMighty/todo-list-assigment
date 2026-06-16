@@ -73,6 +73,11 @@ main {
   align-items: center;
 }
 
+.project:hover {
+  background-color: color-mix(in srgb, #000, white 5%);
+  transition: background-color 0.2s;
+}
+
 .project > div {
   position: relative;
 }
@@ -111,6 +116,10 @@ img:hover {
   font-size: 2rem;
   color: white;
   background-color: inherit;
+}
+
+hr {
+  margin: 0;
 }
 
 .todos > button {
