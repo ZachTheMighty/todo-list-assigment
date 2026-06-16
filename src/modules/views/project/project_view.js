@@ -71,7 +71,7 @@ export default class ProjectView {
 
     const emptyMessage = document.createElement("div");
     emptyMessage.classList.add("empty-message");
-    emptyMessage.textContent = "You don't have any projects. Add some";
+    emptyMessage.textContent = "You don't have any projects. useless bitch";
 
     if (!this.app.querySelector(":scope > .project"))
       this.app.append(emptyMessage);
