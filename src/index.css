@@ -19,6 +19,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #c5fffd;
+  user-select: none;
 }
 
 main {
