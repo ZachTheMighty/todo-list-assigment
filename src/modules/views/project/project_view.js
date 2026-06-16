@@ -21,7 +21,6 @@ export default class ProjectView {
     this.addProjectButton.setAttribute("command", "show-modal");
     this.addProjectButton.setAttribute("commandfor", "add-project");
 
-    this.deleteProjectButtons = [];
     this.projectDivs = [];
 
     this.app.append(
@@ -60,8 +59,6 @@ export default class ProjectView {
     deleteProjectButton.classList.add("delete-project");
     deleteProjectButton.setAttribute("data-id", project.id);
 
-    this.deleteProjectButtons.push(deleteProjectButton);
-
     projectHeader.append(projectName, editIconButton);
 
     projectDiv.append(projectHeader, deleteProjectButton);
@@ -92,6 +89,13 @@ export default class ProjectView {
     });
   }
 
+  bindDeleteProject(handler) {
+    this.app.addEventListener("click", (event) => {
+      if (event.target.classList.contains("delete-project"))
+        handler(event.target);
+    });
+  }
+
   bindRenameProject(handler) {
     let projectToBeRenamed = null;
 
@@ -104,14 +108,6 @@ export default class ProjectView {
       e.preventDefault();
       handler(projectToBeRenamed);
       this.renameProjectForm.reset();
-    });
-  }
-
-  bindDeleteProject(handler) {
-    const defaultDeleteButton = document.querySelector(".delete-project");
-    defaultDeleteButton.addEventListener("click", (e) => {
-      e.stopPropagation();
-      handler(defaultDeleteButton);
     });
   }
 }

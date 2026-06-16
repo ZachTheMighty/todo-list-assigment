@@ -53,13 +53,6 @@ class Controller {
 
     AddProjectToDropDown(lastestProject);
 
-    this.projectView.deleteProjectButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        event.stopPropagation();
-        this.handleDeleteProject(button);
-      });
-    });
-
     this.projectView.projectDivs.forEach((projectDiv) => {
       projectDiv.addEventListener("click", () =>
         this.handleDisplayTodos(projectDiv.firstChild),
