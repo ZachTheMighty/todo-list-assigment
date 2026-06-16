@@ -6,4 +6,8 @@ export default class ToDoModel {
   addToDo(todo) {
     this.todos.push(todo);
   }
+
+  deleteToDo(todoIndex) {
+    this.todos.splice(todoIndex, 1);
+  }
 }
