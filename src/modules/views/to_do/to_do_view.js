@@ -62,6 +62,7 @@ export default class ToDoView {
     const deleteButton = document.createElement("img");
     deleteButton.src = deleteIcon;
     deleteButton.classList.add("delete-todo");
+    deleteButton.setAttribute("data-id", todo.id);
 
     this.deleteToDoButtons.push(deleteButton);
 

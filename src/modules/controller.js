@@ -221,7 +221,7 @@ class Controller {
       }
     });
 
-    this.todoView.deleteProjectButtons.forEach((button) => {
+    this.todoView.deleteToDoButtons.forEach((button) => {
       button.addEventListener("click", (event) => {
         event.stopPropagation();
         this.handleDeleteToDo(button);
