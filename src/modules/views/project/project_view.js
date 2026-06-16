@@ -91,8 +91,8 @@ export default class ProjectView {
 
   bindDeleteProject(handler) {
     this.app.addEventListener("click", (event) => {
-      if (event.target.classList.contains("delete-project"))
-        handler(event.target);
+      const deleteProjectButton = event.target.closest(".delete-project");
+      if (deleteProjectButton) handler(deleteProjectButton);
     });
   }
 
