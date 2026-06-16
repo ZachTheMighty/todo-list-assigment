@@ -167,6 +167,13 @@ class Controller {
 
     for (let i = 0; i < projectHeaderObject.todos.length; i++)
       this.todoView.render(projectHeaderObject.todos[i]);
+
+    this.todoView.deleteToDoButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        this.handleDeleteToDo(button);
+      });
+    });
   }
 
   selectProject(object, dom) {
