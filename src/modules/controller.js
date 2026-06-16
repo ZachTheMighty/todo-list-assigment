@@ -44,6 +44,10 @@ class Controller {
 
     this.projectView.render(lastestProject);
 
+    this.selectProject(lastestProject, this.getCorrespondingObject(lastestProject));
+    this.todoView.emptyApp();
+    this.todoView.render(null);
+
     AddProjectToDropDown(lastestProject);
 
     this.projectView.deleteProjectButtons.forEach((button) => {
