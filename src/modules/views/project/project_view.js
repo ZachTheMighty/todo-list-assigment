@@ -22,7 +22,7 @@ export default class ProjectView {
     this.addProjectButton.setAttribute("commandfor", "add-project");
 
     this.deleteProjectButtons = [];
-    this.projectHeaders = [];
+    this.projectDivs = [];
 
     this.app.append(
       this.addProjectButton,
@@ -38,9 +38,10 @@ export default class ProjectView {
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
 
+    this.projectDivs.push(projectDiv);
+
     const projectHeader = document.createElement("div");
 
-    this.projectHeaders.push(projectHeader);
 
     const projectName = document.createElement("h1");
     projectName.textContent = project.name;

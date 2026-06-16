@@ -54,9 +54,9 @@ class Controller {
       button.addEventListener("click", () => this.handleDeleteProject(button));
     });
 
-    this.projectView.projectHeaders.forEach((projectHeader) => {
-      projectHeader.addEventListener("click", () =>
-        this.handleDisplayTodos(projectHeader),
+    this.projectView.projectDivs.forEach((projectDiv) => {
+      projectDiv.addEventListener("click", () =>
+        this.handleDisplayTodos(projectDiv.firstChild),
       );
     });
   }
