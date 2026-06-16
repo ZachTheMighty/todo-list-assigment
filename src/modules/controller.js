@@ -79,21 +79,91 @@ class Controller {
     const id = deleteProjectButton.getAttribute("data-id");
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       if (ProjectModel.projects[i].id === id) {
-        if (ProjectModel.projects.length > 1)
-          this.handleDisplayTodos(
-            document.querySelector(".project").nextElementSibling
-              .nextElementSibling.firstChild,
-          );
-        else {
-          this.todoView.emptyApp();
-          this.todoView.render(null);
+        let nextProject, previousProject;
+
+        try
+        {
+          nextProject = deleteProjectButton.parentElement.nextElementSibling.nextElementSibling;
+          previousProject = deleteProjectButton.parentElement.previousElementSibling.previousElementSibling;
         }
+
+        catch(error)
+        {
+          if(error.message.includes(next)) nextProject = null;
+          if(error.message.includes(previous)) previousProject = null;
+        }
+
+        if (ProjectModel.projects.length > 1)
+        {
+
+        if(this.isMiddleProject(nextProject, previousProject))
+          this.handleDisplayTodos(nextProject.firstChild);
+
+        else if(this.isLastProject(nextProject, previousProject))
+          this.handleDisplayTodos(previousProject.firstChild);
+
+        else
+            this.handleDisplayTodos(
+              document.querySelector(".project").nextElementSibling
+                .nextElementSibling.firstChild,
+            );
+        }
+
+          else {
+            this.todoView.emptyApp();
+            this.todoView.render(null);
+          }
 
         ProjectModel.removeProject(i);
         this.projectView.deleteProject(id);
         deleteProjectInDropdown(id);
       }
     }
+  }
+
+  isMiddleProject(next, previous)
+  {
+    try
+    {
+
+      if (
+          next.classList.contains(
+          "project",
+          ) &&
+          previous.classList.contains(
+          "project",
+          )
+        ) return true;
+    }
+
+    catch(error)
+    {
+      return false;
+    }
+
+    return false;
+  }
+
+  isLastProject(next, previous)
+  {
+    try
+    {
+
+      if (
+          next === null
+           &&
+          previous.classList.contains(
+          "project",
+          )
+        )return true;
+    }
+
+    catch(error)
+    {
+      return false;
+    }
+
+      return false;
   }
 
   removeDeleteButton(id) {
