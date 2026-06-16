@@ -75,6 +75,10 @@ main {
   padding: 0 8px;
 }
 
+.todo {
+  font-size: 0.8rem;
+}
+
 .project:hover,
 .todo:hover {
   background-color: color-mix(in srgb, #000, white 5%);
@@ -96,7 +100,7 @@ main {
 
 .delete-project,
 .delete-todo {
-  width: 30px;
+  width: 2em;
 }
 
 button:has(img) {
