@@ -33,6 +33,6 @@ export default class ProjectModel {
   }
 
   static isEmpty() {
-    return projects.length === 0 ? true : false;
+    return ProjectModel.projects.length === 0 ? true : false;
   }
 }
