@@ -14,7 +14,8 @@ class Controller {
     this.todoModel = todoModel;
     this.todoView = todoView;
 
-    this.projectView.render(ProjectModel.getProjects()[0]);
+    this.defaultProject = ProjectModel.getProjects()[0];
+    this.projectView.render(this.defaultProject);
 
     this.projectView.bindAddProject(() => this.handleAddProject());
     this.projectView.bindRenameProject((project) =>
@@ -90,17 +91,9 @@ class Controller {
   }
 
   handleDisplayTodos(projectHeader) {
-    let projectHeaderObject;
+    let projectHeaderObject = this.getCorrespondingObject(projectHeader);
 
     this.todoView.emptyApp();
-
-    for (let i = 0; i < ProjectModel.projects.length; i++) {
-      if (
-        projectHeader.nextElementSibling.getAttribute("data-id") ===
-        ProjectModel.projects[i].id
-      )
-        projectHeaderObject = ProjectModel.projects[i];
-    }
 
     this.selectProject(projectHeaderObject, projectHeader);
 
@@ -119,6 +112,24 @@ class Controller {
           ? project.firstChild.classList.add("selected")
           : project.firstChild.classList.remove("selected");
     }
+  }
+
+  getCorrespondingObject(object) {
+    if (object instanceof Node)
+      for (let i = 0; i < ProjectModel.projects.length; i++)
+        if (
+          object.nextElementSibling.getAttribute("data-id") ===
+          ProjectModel.projects[i].id
+        )
+          return ProjectModel.projects[i];
+
+    for (const project of this.projectView.app.childNodes)
+      if (project.classList.contains("project"))
+        if (
+          object.id ===
+          project.firstChild.nextElementSibling.getAttribute("data-id")
+        )
+          return project.firstChild;
   }
 
   handleAddToDo() {
