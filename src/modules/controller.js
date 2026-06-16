@@ -238,6 +238,10 @@ class Controller {
         ) {
           this.todoModel.deleteToDo(j);
           ProjectModel.projects[i].todos.splice(j, 1);
+
+          this.handleDisplayTodos(
+            this.getCorrespondingObject(ProjectModel.projects[i]),
+          );
         }
       }
     }
