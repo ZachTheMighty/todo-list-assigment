@@ -2,6 +2,9 @@ import createDialog from "../dialog.js";
 import createForm from "./to_do_form.js";
 import { createLabel, createInput } from "./create_widgets.js";
 
+import deleteIcon from "../../../assets/icons/trash-can-outline.svg";
+import editIcon from "../../../assets/icons/pencil-outline.svg";
+
 export default class ToDoView {
   constructor() {
     this.app = document.querySelector(".todos");
@@ -54,8 +57,9 @@ export default class ToDoView {
     const toDoInfo = document.createElement("div");
     toDoInfo.append(checkBox, title, date);
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete todo";
+    const deleteButton = document.createElement("img");
+    deleteButton.src = deleteIcon;
+    deleteButton.classList.add("delete-todo");
 
     const wrapper = document.createElement("div");
     wrapper.append(toDoInfo, priority, deleteButton);

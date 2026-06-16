@@ -92,7 +92,8 @@ main {
   color: red;
 }
 
-.delete-project {
+.delete-project,
+.delete-todo {
   width: 30px;
 }
 
