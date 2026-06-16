@@ -31,4 +31,8 @@ export default class ProjectModel {
   static removeProject(projectId) {
     ProjectModel.projects.splice(projectId, 1);
   }
+
+  static isProjectsEmpty() {
+    return projects.length === 0 ? true : false;
+  }
 }
