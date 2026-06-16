@@ -84,6 +84,10 @@ class Controller {
             document.querySelector(".project").nextElementSibling
               .nextElementSibling.firstChild,
           );
+        else {
+          this.todoView.emptyApp();
+          this.todoView.render(null);
+        }
 
         ProjectModel.removeProject(i);
         this.projectView.deleteProject(id);
