@@ -228,6 +228,20 @@ class Controller {
       });
     });
   }
+
+  handleDeleteToDo(deleteToDoButton) {
+    for (let i = 0; i < ProjectModel.projects.length; i++) {
+      for (let j = 0; j < ProjectModel.projects[i].todos.length; j++) {
+        if (
+          ProjectModel.projects[i].todos[j].id ===
+          deleteToDoButton.getAttribute("data-id")
+        ) {
+          this.todoModel.deleteToDo(j);
+          ProjectModel.projects[i].todos.splice(j, 1);
+        }
+      }
+    }
+  }
 }
 
 export default new Controller(
