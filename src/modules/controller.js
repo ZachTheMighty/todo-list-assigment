@@ -47,9 +47,7 @@ class Controller {
     AddProjectToDropDown(lastestProject);
 
     this.projectView.deleteProjectButtons.forEach((button) => {
-      button.addEventListener("click", () =>
-        this.handleDeleteProject(button.getAttribute("data-id")),
-      );
+      button.addEventListener("click", () => this.handleDeleteProject(button));
     });
 
     this.projectView.projectHeaders.forEach((projectHeader) => {
@@ -77,7 +75,8 @@ class Controller {
     renameProjectInDropdown(projectObject);
   }
 
-  handleDeleteProject(id) {
+  handleDeleteProject(deleteProjectButton) {
+    const id = deleteProjectButton.getAttribute("data-id");
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       if (ProjectModel.projects[i].id === id) {
         ProjectModel.removeProject(i);

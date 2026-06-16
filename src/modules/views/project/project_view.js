@@ -110,7 +110,7 @@ export default class ProjectView {
   bindDeleteProject(handler) {
     const defaultDeleteButton = document.querySelector(".delete-project");
     defaultDeleteButton.addEventListener("click", () =>
-      handler(defaultDeleteButton.getAttribute("data-id")),
+      handler(defaultDeleteButton),
     );
   }
 }
