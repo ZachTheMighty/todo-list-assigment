@@ -75,7 +75,8 @@ main {
   padding: 0 8px;
 }
 
-.project:hover {
+.project:hover,
+.todo:hover {
   background-color: color-mix(in srgb, #000, white 5%);
   transition: background-color 0.2s;
 }
