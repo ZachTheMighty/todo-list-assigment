@@ -16,6 +16,10 @@ class Controller {
 
     this.defaultProject = ProjectModel.getProjects()[0];
     this.projectView.render(this.defaultProject);
+    this.selectProject(
+      this.defaultProject,
+      this.getCorrespondingObject(this.defaultProject),
+    );
 
     this.projectView.bindAddProject(() => this.handleAddProject());
     this.projectView.bindRenameProject((project) =>
