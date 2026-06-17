@@ -79,39 +79,45 @@ class Controller {
     const id = deleteProjectButton.getAttribute("data-id");
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       if (ProjectModel.projects[i].id === id) {
-        let nextProject, previousProject;
 
-        try {
-          nextProject =
-            deleteProjectButton.parentElement.nextElementSibling
-              .nextElementSibling;
-          previousProject =
-            deleteProjectButton.parentElement.previousElementSibling
-              .previousElementSibling;
-        } catch (error) {
-          if (error.message.includes(next)) nextProject = null;
-          if (error.message.includes(previous)) previousProject = null;
-        }
-
-        if (ProjectModel.projects.length > 1) {
-          if (this.isMiddleProject(nextProject, previousProject))
-            this.handleDisplayTodos(nextProject.firstChild);
-          else if (this.isLastProject(nextProject, previousProject))
-            this.handleDisplayTodos(previousProject.firstChild);
-          else
-            this.handleDisplayTodos(
-              document.querySelector(".project").nextElementSibling
-                .nextElementSibling.firstChild,
-            );
-        } else {
-          this.todoView.emptyApp();
-          this.todoView.render(null);
-        }
+        this.determineFocus(deleteProjectButton);
 
         ProjectModel.removeProject(i);
         this.projectView.deleteProject(id);
         deleteProjectInDropdown(id);
       }
+    }
+  }
+
+  determineFocus(deleteProjectButton)
+  {
+    let nextProject, previousProject;
+
+    try {
+      nextProject =
+      deleteProjectButton.parentElement.nextElementSibling
+      .nextElementSibling;
+      previousProject =
+      deleteProjectButton.parentElement.previousElementSibling
+      .previousElementSibling;
+    } catch (error) {
+      if (error.message.includes(next)) nextProject = null;
+      if (error.message.includes(previous)) previousProject = null;
+    }
+
+    if (ProjectModel.projects.length > 1) {
+      if (this.isMiddleProject(nextProject, previousProject))
+        this.handleDisplayTodos(nextProject.firstChild);
+      else if (this.isLastProject(nextProject, previousProject))
+        this.handleDisplayTodos(previousProject.firstChild);
+      else
+        this.handleDisplayTodos(
+          document.querySelector(".project").nextElementSibling
+          .nextElementSibling.firstChild,
+        );
+    } else {
+      this.todoView.emptyApp();
+      this.todoView.render(null);
     }
   }
 
