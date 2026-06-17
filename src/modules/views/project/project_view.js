@@ -130,8 +130,8 @@ export default class ProjectView {
         projectToBeRenamed = event.source.previousElementSibling;
     });
 
-    this.renameProjectForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+    this.renameProjectForm.addEventListener("submit", (event) => {
+      event.preventDefault();
       handler(projectToBeRenamed);
       this.renameProjectForm.reset();
     });
