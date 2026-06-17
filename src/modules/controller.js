@@ -43,12 +43,13 @@ class Controller {
   handleAddProject() {
     ProjectModel.addProject({
       name: this.projectView.createProjectForm.name.value,
-      selected: true,
+      selected: false,
       todos: [],
       id: crypto.randomUUID(),
     });
 
     const lastestProject = ProjectModel.projects.at(-1);
+    ProjectModel.selectProject(lastestProject);
 
     this.projectView.render(lastestProject);
 
