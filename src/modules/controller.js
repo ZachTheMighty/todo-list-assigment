@@ -134,13 +134,6 @@ class Controller {
     return false;
   }
 
-  removeDeleteButton(id) {
-    for (let i = 0; i < this.projectView.deleteProjectButtons.length; i++) {
-      if (this.projectView.deleteProjectButtons.getAttribute("data-id") === id)
-        this.projectView.deleteProjectButtons.splice(i, 1);
-    }
-  }
-
   handleDisplayTodos(projectHeader) {
     let projectHeaderObject = this.getCorrespondingObject(projectHeader);
 
