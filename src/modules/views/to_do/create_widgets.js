@@ -46,7 +46,7 @@ class Dropdown {
 export function createProjectDropdown(name) {
   setCommonAttributes(Dropdown.dropdown, name);
 
-  const defaultProject = ProjectModel.getProjects()[0];
+  const defaultProject = ProjectModel.projects[0];
   Dropdown.dropdown.append(
     createOption(defaultProject.name, defaultProject.id),
   );

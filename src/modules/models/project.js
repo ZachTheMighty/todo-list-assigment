@@ -12,10 +12,6 @@ export default class ProjectModel {
 
   static projects = [];
 
-  static getProjects() {
-    return ProjectModel.projects;
-  }
-
   static selectProject(projectSelected) {
     ProjectModel.projects.forEach((project) =>
       projectSelected === project

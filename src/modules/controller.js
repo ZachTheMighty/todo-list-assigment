@@ -14,7 +14,7 @@ class Controller {
     this.todoModel = todoModel;
     this.todoView = todoView;
 
-    this.defaultProject = ProjectModel.getProjects()[0];
+    this.defaultProject = ProjectModel.projects[0];
     this.projectView.render(this.defaultProject);
     this.selectProject(
       this.defaultProject,
@@ -197,7 +197,7 @@ class Controller {
     });
 
     const lastToDo = this.todoModel.todos.at(-1);
-    const projects = ProjectModel.getProjects();
+    const projects = ProjectModel.projects;
 
     projects.forEach((project) => {
       if (project.id === lastToDo.belongsTo) {
