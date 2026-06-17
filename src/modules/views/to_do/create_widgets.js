@@ -63,6 +63,9 @@ export function createOption(textContent, value) {
 
 export function AddProjectToDropDown(project) {
   Dropdown.dropdown.append(createOption(project.name, project.id));
+  Dropdown.dropdown.childNodes.forEach((option) => {
+    if (option.value === project.id) option.selected = true;
+  });
 }
 
 export function renameProjectInDropdown(project) {
