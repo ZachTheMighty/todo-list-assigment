@@ -86,7 +86,9 @@ export default class ToDoView {
     this.addToDoForm.addEventListener("submit", (event) => {
       event.preventDefault();
       handler();
-      this.addToDoForm.reset();
+      this.addToDoForm.childNodes.forEach((div) => {
+        if (div.lastChild.tagName !== "SELECT") div.lastChild.value = "";
+      });
     });
   }
 }
