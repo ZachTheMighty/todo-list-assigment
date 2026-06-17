@@ -31,4 +31,8 @@ export default class ProjectModel {
   static isEmpty() {
     return ProjectModel.projects.length === 0 ? true : false;
   }
+
+  static updateProjectName(project, newName) {
+    project.name = newName;
+  }
 }
