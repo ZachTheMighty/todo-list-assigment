@@ -59,10 +59,10 @@ class Controller {
 
   handleRenameProject(project) {
     const projectName = this.projectView.renameProjectForm.name.value;
-    project.textContent = projectName;
 
     let projectObject = this.getCorrespondingObject(project.parentElement);
     projectObject.name = projectName;
+    this.displayProjects();
 
     renameProjectInDropdown(projectObject);
   }
