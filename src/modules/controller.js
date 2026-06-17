@@ -58,19 +58,11 @@ class Controller {
   }
 
   handleRenameProject(project) {
-    project.textContent = this.projectView.renameProjectForm.name.value;
-    let projectObject;
+    const projectName = this.projectView.renameProjectForm.name.value;
+    project.textContent = projectName;
 
-    for (let i = 0; i < ProjectModel.projects.length; i++) {
-      if (
-        project.parentElement.nextElementSibling.getAttribute("data-id") ===
-        ProjectModel.projects[i].id
-      ) {
-        ProjectModel.projects[i].name =
-          this.projectView.renameProjectForm.name.value;
-        projectObject = ProjectModel.projects[i];
-      }
-    }
+    let projectObject = this.getCorrespondingObject(project.parentElement);
+    projectObject.name = projectName;
 
     renameProjectInDropdown(projectObject);
   }
