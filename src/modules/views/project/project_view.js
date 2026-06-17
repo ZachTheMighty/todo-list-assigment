@@ -113,6 +113,11 @@ export default class ProjectView {
   bindDisplayToDos(handler) {
     this.app.addEventListener("click", (event) => {
       const projectDiv = event.target.closest(".project");
+      if (
+        event.target.closest("[command='show-modal']") ||
+        event.target.closest(".delete-project")
+      )
+        return;
       if (projectDiv) handler(projectDiv);
     });
   }
