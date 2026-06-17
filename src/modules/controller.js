@@ -15,11 +15,8 @@ class Controller {
     this.todoView = todoView;
 
     this.defaultProject = ProjectModel.projects[0];
+    ProjectModel.selectProject(this.defaultProject);
     this.projectView.render(this.defaultProject);
-    this.selectProject(
-      this.defaultProject,
-      this.getCorrespondingObject(this.defaultProject),
-    );
 
     this.projectView.bindAddProject(() => this.handleAddProject());
     this.projectView.bindRenameProject((project) =>
@@ -35,10 +32,17 @@ class Controller {
     this.todoView.bindAddToDo(() => this.handleAddToDo());
   }
 
+  displayProjects() {
+    this.projectView.emptyApp();
+    ProjectModel.projects.forEach((project) =>
+      this.projectView.render(project),
+    );
+  }
+
   handleAddProject() {
     ProjectModel.addProject({
       name: this.projectView.createProjectForm.name.value,
-      selected: false,
+      selected: true,
       todos: [],
       id: crypto.randomUUID(),
     });
@@ -47,10 +51,6 @@ class Controller {
 
     this.projectView.render(lastestProject);
 
-    this.selectProject(
-      lastestProject,
-      this.getCorrespondingObject(lastestProject),
-    );
     this.todoView.emptyApp();
     this.todoView.render(null);
 
@@ -75,7 +75,10 @@ class Controller {
           this.determineFocus(deleteProjectButton);
 
         ProjectModel.removeProject(i);
-        this.projectView.deleteProject(id);
+        this.displayProjects();
+
+        if (ProjectModel.isEmpty()) this.projectView.render(null);
+
         deleteProjectInDropdown(id);
       }
     }
@@ -140,7 +143,8 @@ class Controller {
 
     this.todoView.emptyApp();
 
-    this.selectProject(projectHeaderObject, projectHeader);
+    ProjectModel.selectProject(projectHeaderObject);
+    this.displayProjects();
 
     if (projectHeaderObject.todos.length === 0) this.todoView.render(null);
 
@@ -153,17 +157,6 @@ class Controller {
         this.handleDeleteToDo(button);
       });
     });
-  }
-
-  selectProject(object, dom) {
-    ProjectModel.selectProject(object);
-
-    for (const project of this.projectView.app.childNodes) {
-      if (project.classList.contains("project"))
-        project.firstChild === dom
-          ? project.firstChild.classList.add("selected")
-          : project.firstChild.classList.remove("selected");
-    }
   }
 
   getCorrespondingObject(object) {

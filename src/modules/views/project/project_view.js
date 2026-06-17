@@ -21,6 +21,11 @@ export default class ProjectView {
     this.addProjectButton.setAttribute("command", "show-modal");
     this.addProjectButton.setAttribute("commandfor", "add-project");
 
+    this.emptyMessage = document.createElement("div");
+    this.emptyMessage.classList.add("empty-message");
+    this.emptyMessage.textContent =
+      "You don't have any projects. useless bitch";
+
     this.app.append(
       this.addProjectButton,
       this.addProjectDialog,
@@ -29,8 +34,11 @@ export default class ProjectView {
   }
 
   render(project) {
-    if (this.app.querySelector(":scope > .empty-message"))
-      document.querySelector(".empty-message").remove();
+    if (!project) {
+      this.emptyApp();
+      this.app.append(this.emptyMessage);
+      return;
+    } else this.emptyMessage.remove();
 
     const projectDiv = document.createElement("div");
     projectDiv.classList.add("project");
@@ -62,19 +70,26 @@ export default class ProjectView {
     const breakLine = document.createElement("hr");
 
     this.app.append(projectDiv, breakLine);
+
+    if (project.selected) this.selectProject(projectDiv);
   }
 
-  deleteProject(id) {
-    const deleteButton = document.querySelector(`[data-id="${id}"]`);
-    deleteButton.parentElement.nextElementSibling.remove();
-    deleteButton.parentElement.remove();
+  emptyApp() {
+    this.app.textContent = "";
+    this.app.append(
+      this.addProjectButton,
+      this.addProjectDialog,
+      this.renameProjectDialog,
+    );
+  }
 
-    const emptyMessage = document.createElement("div");
-    emptyMessage.classList.add("empty-message");
-    emptyMessage.textContent = "You don't have any projects. useless bitch";
-
-    if (!this.app.querySelector(":scope > .project"))
-      this.app.append(emptyMessage);
+  selectProject(dom) {
+    for (const node of this.app.childNodes) {
+      if (node.classList.contains("project"))
+        node === dom
+          ? node.firstChild.classList.add("selected")
+          : node.firstChild.classList.remove("selected");
+    }
   }
 
   bindAddProject(handler) {
