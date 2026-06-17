@@ -103,10 +103,7 @@ export default class ProjectView {
   bindDeleteProject(handler) {
     this.app.addEventListener("click", (event) => {
       const deleteProjectButton = event.target.closest(".delete-project");
-      if (deleteProjectButton) {
-        event.stopImmediatePropagation();
-        handler(deleteProjectButton);
-      }
+      if (deleteProjectButton) handler(deleteProjectButton);
     });
   }
 
