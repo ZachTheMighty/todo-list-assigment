@@ -23,8 +23,6 @@ export default class ToDoView {
     this.emptyMessage.classList.add("empty-message");
     this.emptyMessage.textContent = "You don't have any tasks, what a bum";
 
-    this.deleteToDoButtons = [];
-
     this.app.append(this.addToDoButton, this.addToDoDialog);
   }
 
@@ -64,8 +62,6 @@ export default class ToDoView {
     deleteButton.classList.add("delete-todo");
     deleteButton.setAttribute("data-id", todo.id);
 
-    this.deleteToDoButtons.push(deleteButton);
-
     const wrapper = document.createElement("div");
     wrapper.append(toDoInfo, priority, deleteButton);
 
@@ -89,6 +85,13 @@ export default class ToDoView {
       this.addToDoForm.childNodes.forEach((div) => {
         if (div.lastChild.tagName !== "SELECT") div.lastChild.value = "";
       });
+    });
+  }
+
+  bindDeleteToDo(handler) {
+    this.app.addEventListener("click", (event) => {
+      const deleteToDoButton = event.target.closest(".delete-todo");
+      if (deleteToDoButton) handler(deleteToDoButton);
     });
   }
 }

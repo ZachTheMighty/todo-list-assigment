@@ -30,6 +30,7 @@ class Controller {
     this.todoView.render(null);
 
     this.todoView.bindAddToDo(() => this.handleAddToDo());
+    this.todoView.bindDeleteToDo((button) => this.handleDeleteToDo(button));
   }
 
   displayProjects() {
@@ -151,13 +152,6 @@ class Controller {
 
     for (let i = 0; i < projectHeaderObject.todos.length; i++)
       this.todoView.render(projectHeaderObject.todos[i]);
-
-    this.todoView.deleteToDoButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        event.stopPropagation();
-        this.handleDeleteToDo(button);
-      });
-    });
   }
 
   getCorrespondingObject(object) {
@@ -199,13 +193,6 @@ class Controller {
         project.todos.push(lastToDo);
         if (project.selected) this.todoView.render(lastToDo);
       }
-    });
-
-    this.todoView.deleteToDoButtons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        event.stopPropagation();
-        this.handleDeleteToDo(button);
-      });
     });
   }
 
