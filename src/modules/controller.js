@@ -71,7 +71,8 @@ class Controller {
     const id = deleteProjectButton.getAttribute("data-id");
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       if (ProjectModel.projects[i].id === id) {
-        this.determineFocus(deleteProjectButton);
+        if (ProjectModel.projects[i].selected)
+          this.determineFocus(deleteProjectButton);
 
         ProjectModel.removeProject(i);
         this.projectView.deleteProject(id);
