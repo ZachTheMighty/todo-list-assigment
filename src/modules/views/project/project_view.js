@@ -92,6 +92,10 @@ export default class ProjectView {
     }
   }
 
+  renderProjectNameUpdate(project, newName) {
+    project.textContent = newName;
+  }
+
   bindAddProject(handler) {
     this.createProjectForm.addEventListener("submit", (e) => {
       e.preventDefault();
