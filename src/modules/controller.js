@@ -79,7 +79,6 @@ class Controller {
     const id = deleteProjectButton.getAttribute("data-id");
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       if (ProjectModel.projects[i].id === id) {
-
         this.determineFocus(deleteProjectButton);
 
         ProjectModel.removeProject(i);
@@ -89,17 +88,15 @@ class Controller {
     }
   }
 
-  determineFocus(deleteProjectButton)
-  {
+  determineFocus(deleteProjectButton) {
     let nextProject, previousProject;
 
     try {
       nextProject =
-      deleteProjectButton.parentElement.nextElementSibling
-      .nextElementSibling;
+        deleteProjectButton.parentElement.nextElementSibling.nextElementSibling;
       previousProject =
-      deleteProjectButton.parentElement.previousElementSibling
-      .previousElementSibling;
+        deleteProjectButton.parentElement.previousElementSibling
+          .previousElementSibling;
     } catch (error) {
       if (error.message.includes(next)) nextProject = null;
       if (error.message.includes(previous)) previousProject = null;
@@ -113,7 +110,7 @@ class Controller {
       else
         this.handleDisplayTodos(
           document.querySelector(".project").nextElementSibling
-          .nextElementSibling.firstChild,
+            .nextElementSibling.firstChild,
         );
     } else {
       this.todoView.emptyApp();
