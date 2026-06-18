@@ -176,7 +176,7 @@ class Controller {
   }
 
   handleAddToDo() {
-    const form = this.todoView.addToDoForm;
+    const form = this.todoView.form;
 
     this.todoModel.addToDo({
       title: form.title.value,
