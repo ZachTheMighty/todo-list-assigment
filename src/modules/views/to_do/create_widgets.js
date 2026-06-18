@@ -59,9 +59,7 @@ export function createOption(textContent, value) {
 export function addProjectToDropDown(project) {
   const dropdown = document.querySelector("#project");
   dropdown.append(createOption(project.name, project.id));
-  dropdown.childNodes.forEach((option) => {
-    if (option.value === project.id) option.selected = true;
-  });
+  selectProjectInDropdown(project);
 }
 
 export function renameProjectInDropdown(project) {
@@ -76,6 +74,13 @@ export function deleteProjectInDropdown(projectId) {
   const dropdown = document.querySelector("#project");
   for (const option of dropdown.childNodes)
     if (option.value === projectId) option.remove();
+}
+
+export function selectProjectInDropdown(project) {
+  const dropdown = document.querySelector("#project");
+  dropdown.childNodes.forEach((option) => {
+    if (option.value === project.id) option.selected = true;
+  });
 }
 
 export function setCommonAttributes(widget, name) {
