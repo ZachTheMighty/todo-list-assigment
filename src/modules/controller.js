@@ -64,7 +64,9 @@ class Controller {
   handleRenameProject(project) {
     const projectName = this.projectView.form.name.value;
 
-    let projectObject = this.getCorrespondingObject(project.parentElement);
+    let projectObject = this.getCorrespondingProjectObject(
+      project.parentElement,
+    );
 
     ProjectModel.updateProjectName(projectObject, projectName);
     this.projectView.renderProjectNameUpdate(project, projectName);
@@ -144,7 +146,7 @@ class Controller {
   }
 
   handleDisplayTodos(projectHeader) {
-    let projectHeaderObject = this.getCorrespondingObject(projectHeader);
+    let projectHeaderObject = this.getCorrespondingProjectObject(projectHeader);
 
     this.todoView.emptyApp();
 
@@ -158,7 +160,7 @@ class Controller {
       this.todoView.render(projectHeaderObject.todos[i]);
   }
 
-  getCorrespondingObject(object) {
+  getCorrespondingProjectObject(object) {
     if (object instanceof Node)
       for (let i = 0; i < ProjectModel.projects.length; i++)
         if (
@@ -212,7 +214,7 @@ class Controller {
     ProjectModel.projects[projectIndex].todos.splice(todoIndex, 1);
 
     this.handleDisplayTodos(
-      this.getCorrespondingObject(ProjectModel.projects[projectIndex]),
+      this.getCorrespondingProjectObject(ProjectModel.projects[projectIndex]),
     );
   }
 
