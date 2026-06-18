@@ -11,8 +11,11 @@ export default class ToDoView {
 
     this.addToDoDialog = createDialog("add-todo", "Add todo");
     this.addToDoForm = createForm("Add todo");
-
     this.addToDoDialog.append(this.addToDoForm);
+
+    this.editToDoDialog = createDialog("edit-todo", "Edit todo");
+    this.editToDoForm = createForm("Edit todo");
+    this.editToDoDialog.append(this.editToDoForm);
 
     this.addToDoButton = document.createElement("button");
     this.addToDoButton.textContent = "Add todo";
@@ -23,7 +26,7 @@ export default class ToDoView {
     this.emptyMessage.classList.add("empty-message");
     this.emptyMessage.textContent = "You don't have any tasks, what a bum";
 
-    this.app.append(this.addToDoButton, this.addToDoDialog);
+    this.app.append(this.addToDoButton, this.addToDoDialog, this.editToDoDialog);
   }
 
   render(todo) {
