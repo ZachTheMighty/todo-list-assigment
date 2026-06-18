@@ -1,9 +1,6 @@
-export default function createDialog(id, textContent) {
+export default function createDialog() {
   const dialog = document.createElement("dialog");
-  dialog.id = id;
-
   const header = document.createElement("h1");
-  header.textContent = textContent;
 
   const closeDialog = document.createElement("button");
   closeDialog.textContent = "✕";

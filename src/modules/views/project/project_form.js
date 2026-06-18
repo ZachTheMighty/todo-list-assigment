@@ -1,4 +1,4 @@
-export default function createForm(submitButtonName) {
+export default function createForm() {
   const form = document.createElement("form");
   const div = document.createElement("div");
 
@@ -14,7 +14,6 @@ export default function createForm(submitButtonName) {
   input.autocomplete = "off";
 
   const submitButton = document.createElement("button");
-  submitButton.textContent = submitButtonName;
 
   div.append(label);
   div.append(input);

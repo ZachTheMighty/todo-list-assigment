@@ -6,7 +6,7 @@ import {
   createProjectDropdown,
 } from "./create_widgets.js";
 
-export default function createForm(submitButtonName) {
+export default function createForm() {
   const form = document.createElement("form");
 
   const divs = [];
@@ -40,7 +40,6 @@ export default function createForm(submitButtonName) {
   }
 
   const submitButton = document.createElement("button");
-  submitButton.textContent = submitButtonName;
 
   form.append(submitButton);
 

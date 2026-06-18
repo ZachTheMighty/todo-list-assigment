@@ -8,8 +8,8 @@ export default class ProjectView {
   constructor() {
     this.app = document.querySelector(".projects");
 
-    this.dialog = createDialog("add-project", "Add project");
-    this.form = createForm("Add project");
+    this.dialog = createDialog();
+    this.form = createForm();
     this.dialog.append(this.form);
 
     this.addProjectButton = document.createElement("button");

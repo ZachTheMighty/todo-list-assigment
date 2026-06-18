@@ -9,8 +9,8 @@ export default class ToDoView {
   constructor() {
     this.app = document.querySelector(".todos");
 
-    this.addToDoDialog = createDialog("add-todo", "Add todo");
-    this.addToDoForm = createForm("Add todo");
+    this.addToDoDialog = createDialog();
+    this.addToDoForm = createForm();
     this.addToDoDialog.append(this.addToDoForm);
 
     this.editToDoDialog = createDialog("edit-todo", "Edit todo");
