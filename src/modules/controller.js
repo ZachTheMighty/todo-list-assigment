@@ -32,7 +32,7 @@ class Controller {
 
     this.todoView.bindAddToDo(() => this.handleAddToDo());
     this.todoView.bindDeleteToDo((button) => this.handleDeleteToDo(button));
-    this.todoView.bindEditToDo();
+    // this.todoView.bindEditToDo();
   }
 
   displayProjects() {
@@ -176,6 +176,17 @@ class Controller {
           project.firstChild.nextElementSibling.getAttribute("data-id")
         )
           return project.firstChild;
+  }
+
+  getCorrespondingTodoObject(object) {
+    if (object instanceof Node)
+      for (let i = 0; i < this.todoModel.todos.length; i++)
+        if (
+          object.parentElement.nextElementSibling.nextElementSibling.getAttribute(
+            "data-id",
+          ) === this.todoModel.todos[i].id
+        )
+          return this.todoModel.todos[i];
   }
 
   handleAddToDo() {
