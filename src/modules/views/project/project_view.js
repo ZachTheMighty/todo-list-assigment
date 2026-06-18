@@ -38,19 +38,16 @@ export default class ProjectView {
     const projectName = document.createElement("h1");
     projectName.textContent = project.name;
 
-    const editIconImage = document.createElement("img");
-    editIconImage.src = editIcon;
-    editIconImage.classList.add("edit-project");
-
-    const editIconButton = document.createElement("button");
-    editIconButton.append(editIconImage);
+    const editImage = document.createElement("img");
+    editImage.src = editIcon;
+    editImage.classList.add("edit-project");
 
     const deleteProjectButton = document.createElement("img");
     deleteProjectButton.src = deleteIcon;
     deleteProjectButton.classList.add("delete-project");
     deleteProjectButton.setAttribute("data-id", project.id);
 
-    projectHeader.append(projectName, editIconButton);
+    projectHeader.append(projectName, editImage);
 
     projectDiv.append(projectHeader, deleteProjectButton);
 
@@ -123,8 +120,7 @@ export default class ProjectView {
       const editProjectButton = event.target.closest("img");
       if (!editProjectButton) return;
 
-      projectToBeRenamed =
-        editProjectButton.parentElement.previousElementSibling;
+      projectToBeRenamed = editProjectButton.previousElementSibling;
 
       this.form.id = "edit";
       this.form.querySelector("button").textContent = "Edit project";
