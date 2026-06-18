@@ -201,19 +201,26 @@ class Controller {
   }
 
   handleDeleteToDo(deleteToDoButton) {
+    const todoIndex = this.findTodo(
+      deleteToDoButton.getAttribute("data-id"),
+    ).todoIndex;
+    const projectIndex = this.findTodo(
+      deleteToDoButton.getAttribute("data-id"),
+    ).projectIndex;
+
+    this.todoModel.deleteToDo(todoIndex);
+    ProjectModel.projects[projectIndex].todos.splice(todoIndex, 1);
+
+    this.handleDisplayTodos(
+      this.getCorrespondingObject(ProjectModel.projects[projectIndex]),
+    );
+  }
+
+  findTodo(todoId) {
     for (let i = 0; i < ProjectModel.projects.length; i++) {
       for (let j = 0; j < ProjectModel.projects[i].todos.length; j++) {
-        if (
-          ProjectModel.projects[i].todos[j].id ===
-          deleteToDoButton.getAttribute("data-id")
-        ) {
-          this.todoModel.deleteToDo(j);
-          ProjectModel.projects[i].todos.splice(j, 1);
-
-          this.handleDisplayTodos(
-            this.getCorrespondingObject(ProjectModel.projects[i]),
-          );
-        }
+        if (ProjectModel.projects[i].todos[j].id === todoId)
+          return { todoIndex: j, projectIndex: i };
       }
     }
   }
