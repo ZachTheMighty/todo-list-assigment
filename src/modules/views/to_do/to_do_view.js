@@ -52,12 +52,19 @@ export default class ToDoView {
     date.textContent = todo.dueDate;
 
     const toDoInfo = document.createElement("div");
+    toDoInfo.classList.add("todo-info");
     toDoInfo.append(checkBox, title, date);
 
     const deleteButton = document.createElement("img");
     deleteButton.src = deleteIcon;
     deleteButton.classList.add("delete-todo");
     deleteButton.setAttribute("data-id", todo.id);
+
+    const editImage = document.createElement("img");
+    editImage.src = editIcon;
+    editImage.classList.add("edit-todo");
+
+    toDoInfo.append(editImage);
 
     const wrapper = document.createElement("div");
     wrapper.append(toDoInfo, priority, deleteButton);
