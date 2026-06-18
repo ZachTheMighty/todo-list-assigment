@@ -7,9 +7,7 @@ export default function createDialog(id, textContent) {
 
   const closeDialog = document.createElement("button");
   closeDialog.textContent = "✕";
-
-  closeDialog.command = "close";
-  closeDialog.setAttribute("commandfor", id);
+  closeDialog.addEventListener("click", () => dialog.close());
 
   const dialogHead = document.createElement("div");
   dialogHead.append(header);

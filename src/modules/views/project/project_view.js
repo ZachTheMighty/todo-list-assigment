@@ -8,29 +8,19 @@ export default class ProjectView {
   constructor() {
     this.app = document.querySelector(".projects");
 
-    this.addProjectDialog = createDialog("add-project", "Add project");
-    this.createProjectForm = createForm("Add project");
-    this.addProjectDialog.append(this.createProjectForm);
-
-    this.renameProjectDialog = createDialog("rename-project", "Rename project");
-    this.renameProjectForm = createForm("Rename project");
-    this.renameProjectDialog.append(this.renameProjectForm);
+    this.dialog = createDialog("add-project", "Add project");
+    this.form = createForm("Add project");
+    this.dialog.append(this.form);
 
     this.addProjectButton = document.createElement("button");
     this.addProjectButton.textContent = "Add project";
-    this.addProjectButton.setAttribute("command", "show-modal");
-    this.addProjectButton.setAttribute("commandfor", "add-project");
 
     this.emptyMessage = document.createElement("div");
     this.emptyMessage.classList.add("empty-message");
     this.emptyMessage.textContent =
       "You don't have any projects. useless bitch";
 
-    this.app.append(
-      this.addProjectButton,
-      this.addProjectDialog,
-      this.renameProjectDialog,
-    );
+    this.app.append(this.addProjectButton, this.dialog);
   }
 
   render(project) {
@@ -53,9 +43,6 @@ export default class ProjectView {
     editIconImage.classList.add("edit-project");
 
     const editIconButton = document.createElement("button");
-    editIconButton.setAttribute("command", "show-modal");
-    editIconButton.setAttribute("commandfor", "rename-project");
-
     editIconButton.append(editIconImage);
 
     const deleteProjectButton = document.createElement("img");
@@ -76,11 +63,7 @@ export default class ProjectView {
 
   emptyApp() {
     this.app.textContent = "";
-    this.app.append(
-      this.addProjectButton,
-      this.addProjectDialog,
-      this.renameProjectDialog,
-    );
+    this.app.append(this.addProjectButton, this.dialog);
   }
 
   selectProject(dom) {
@@ -97,10 +80,18 @@ export default class ProjectView {
   }
 
   bindAddProject(handler) {
-    this.createProjectForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+    this.addProjectButton.addEventListener("click", () => {
+      this.form.id = "add";
+      this.form.querySelector("button").textContent = "Add project";
+      this.dialog.querySelector("h1").textContent = "Add project";
+      this.dialog.showModal();
+    });
+
+    this.form.addEventListener("submit", (event) => {
+      if (this.form.id !== "add") return;
+      event.preventDefault();
       handler();
-      this.createProjectForm.reset();
+      this.form.reset();
     });
   }
 
@@ -115,7 +106,7 @@ export default class ProjectView {
     this.app.addEventListener("click", (event) => {
       const projectDiv = event.target.closest(".project");
       if (
-        event.target.closest("[command='show-modal']") ||
+        event.target.closest("img") ||
         event.target.closest(".delete-project")
       )
         return;
@@ -126,15 +117,26 @@ export default class ProjectView {
   bindRenameProject(handler) {
     let projectToBeRenamed = null;
 
-    this.renameProjectDialog.addEventListener("command", (event) => {
-      if (event.command === "show-modal")
-        projectToBeRenamed = event.source.previousElementSibling;
+    this.app.addEventListener("click", (event) => {
+      if (event.target.closest(".delete-project")) return;
+
+      const editProjectButton = event.target.closest("img");
+      if (!editProjectButton) return;
+
+      projectToBeRenamed =
+        editProjectButton.parentElement.previousElementSibling;
+
+      this.form.id = "edit";
+      this.form.querySelector("button").textContent = "Edit project";
+      this.dialog.querySelector("h1").textContent = "Edit project";
+      this.dialog.showModal();
     });
 
-    this.renameProjectForm.addEventListener("submit", (event) => {
+    this.form.addEventListener("submit", (event) => {
+      if (this.form.id !== "edit") return;
       event.preventDefault();
       handler(projectToBeRenamed);
-      this.renameProjectForm.reset();
+      this.form.reset();
     });
   }
 }

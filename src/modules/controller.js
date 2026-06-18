@@ -42,7 +42,7 @@ class Controller {
 
   handleAddProject() {
     ProjectModel.addProject({
-      name: this.projectView.createProjectForm.name.value,
+      name: this.projectView.form.name.value,
       selected: false,
       todos: [],
       id: crypto.randomUUID(),
@@ -60,7 +60,7 @@ class Controller {
   }
 
   handleRenameProject(project) {
-    const projectName = this.projectView.renameProjectForm.name.value;
+    const projectName = this.projectView.form.name.value;
 
     let projectObject = this.getCorrespondingObject(project.parentElement);
 
