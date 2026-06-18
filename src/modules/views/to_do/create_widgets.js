@@ -39,19 +39,14 @@ export function createPriorityDropdown(name) {
   return dropdown;
 }
 
-class Dropdown {
-  static dropdown = document.createElement("select");
-}
-
 export function createProjectDropdown(name) {
-  setCommonAttributes(Dropdown.dropdown, name);
+  const dropdown = document.createElement("select");
+  setCommonAttributes(dropdown, name);
 
   const defaultProject = ProjectModel.projects[0];
-  Dropdown.dropdown.append(
-    createOption(defaultProject.name, defaultProject.id),
-  );
+  dropdown.append(createOption(defaultProject.name, defaultProject.id));
 
-  return Dropdown.dropdown;
+  return dropdown;
 }
 
 export function createOption(textContent, value) {
@@ -62,21 +57,24 @@ export function createOption(textContent, value) {
 }
 
 export function AddProjectToDropDown(project) {
-  Dropdown.dropdown.append(createOption(project.name, project.id));
-  Dropdown.dropdown.childNodes.forEach((option) => {
+  const dropdown = document.querySelector("#project");
+  dropdown.append(createOption(project.name, project.id));
+  dropdown.childNodes.forEach((option) => {
     if (option.value === project.id) option.selected = true;
   });
 }
 
 export function renameProjectInDropdown(project) {
-  for (const option of Dropdown.dropdown.childNodes)
+  const dropdown = document.querySelector("#project");
+  for (const option of dropdown.childNodes)
     if (option.value === project.id) {
       option.textContent = project.name;
     }
 }
 
 export function deleteProjectInDropdown(projectId) {
-  for (const option of Dropdown.dropdown.childNodes)
+  const dropdown = document.querySelector("#project");
+  for (const option of dropdown.childNodes)
     if (option.value === projectId) option.remove();
 }
 
