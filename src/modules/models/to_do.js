@@ -11,7 +11,7 @@ export default class ToDoModel {
     this.todos.splice(todoIndex, 1);
   }
 
-  editTodo(title, description, dueDate, priority, notes, belongsTo) {
+  editTodo(todo, title, description, dueDate, priority, notes, belongsTo) {
     todo.title = title;
     todo.description = description;
     todo.dueDate = dueDate;

@@ -233,7 +233,8 @@ class Controller {
     const todoObject = this.getCorrespondingTodoObject(todoLabel);
     const form = this.todoView.form;
 
-    todoObject.editTodo(
+    this.todoModel.editTodo(
+      todoObject,
       form.title.value,
       form.description.value,
       form.dueDate.value,
