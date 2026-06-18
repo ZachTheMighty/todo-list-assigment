@@ -199,6 +199,7 @@ class Controller {
       priority: form.priority.value,
       notes: form.notes.value,
       belongsTo: form.project.value,
+      isChecked: false,
       id: crypto.randomUUID(),
     });
 
