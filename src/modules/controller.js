@@ -32,7 +32,7 @@ class Controller {
 
     this.todoView.bindAddToDo(() => this.handleAddToDo());
     this.todoView.bindDeleteToDo((button) => this.handleDeleteToDo(button));
-    // this.todoView.bindEditToDo();
+    this.todoView.bindEditToDo((todo) => this.handleEditTodo(todo));
   }
 
   displayProjects() {
@@ -226,6 +226,20 @@ class Controller {
 
     this.handleDisplayTodos(
       this.getCorrespondingProjectObject(ProjectModel.projects[projectIndex]),
+    );
+  }
+
+  handleEditTodo(todoLabel) {
+    const todoObject = this.getCorrespondingTodoObject(todoLabel);
+    const form = this.todoView.form;
+
+    todoObject.editTodo(
+      form.title.value,
+      form.description.value,
+      form.dueDate.value,
+      form.priority.value,
+      form.notes.value,
+      form.belongsTo.value,
     );
   }
 
