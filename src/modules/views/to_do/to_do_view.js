@@ -118,5 +118,13 @@ export default class ToDoView {
       this.dialog.querySelector("h1").textContent = "Edit todo";
       this.dialog.showModal();
     });
+
+    this.form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      handler(todoToBeRenamed);
+      this.form.childNodes.forEach((div) => {
+        if (div.lastChild.tagName !== "SELECT") div.lastChild.value = "";
+      });
+    });
   }
 }
