@@ -6,6 +6,7 @@ import ToDoView from "./views/to_do/to_do_view.js";
 import { addProjectToDropDown } from "./views/to_do/create_widgets.js";
 import { renameProjectInDropdown } from "./views/to_do/create_widgets.js";
 import { deleteProjectInDropdown } from "./views/to_do/create_widgets.js";
+import { selectProjectInDropdown } from "./views/to_do/create_widgets.js";
 
 class Controller {
   constructor(projectModel, projectView, todoModel, todoView) {
@@ -147,6 +148,7 @@ class Controller {
     this.todoView.emptyApp();
 
     ProjectModel.selectProject(projectHeaderObject);
+    selectProjectInDropdown(projectHeaderObject);
     this.displayProjects();
 
     if (projectHeaderObject.todos.length === 0) this.todoView.render(null);
