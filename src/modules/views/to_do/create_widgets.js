@@ -56,7 +56,7 @@ export function createOption(textContent, value) {
   return option;
 }
 
-export function AddProjectToDropDown(project) {
+export function addProjectToDropDown(project) {
   const dropdown = document.querySelector("#project");
   dropdown.append(createOption(project.name, project.id));
   dropdown.childNodes.forEach((option) => {

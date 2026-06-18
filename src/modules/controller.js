@@ -3,7 +3,7 @@ import ProjectView from "./views/project/project_view.js";
 import ToDoModel from "./models/to_do.js";
 import ToDoView from "./views/to_do/to_do_view.js";
 
-import { AddProjectToDropDown } from "./views/to_do/create_widgets.js";
+import { addProjectToDropDown } from "./views/to_do/create_widgets.js";
 import { renameProjectInDropdown } from "./views/to_do/create_widgets.js";
 import { deleteProjectInDropdown } from "./views/to_do/create_widgets.js";
 
@@ -56,7 +56,7 @@ class Controller {
     this.todoView.emptyApp();
     this.todoView.render(null);
 
-    AddProjectToDropDown(lastestProject);
+    addProjectToDropDown(lastestProject);
   }
 
   handleRenameProject(project) {
