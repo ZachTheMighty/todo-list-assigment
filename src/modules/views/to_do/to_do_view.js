@@ -104,4 +104,19 @@ export default class ToDoView {
       if (deleteToDoButton) handler(deleteToDoButton);
     });
   }
+
+  bindEditToDo(handler) {
+    let todoToBeRenamed = null;
+
+    this.app.addEventListener("click", (event) => {
+      const editImage = event.target.closest(".edit-todo");
+      if (!editImage) return;
+
+      todoToBeRenamed = editImage.previousElementSibling.previousElementSibling;
+
+      this.form.querySelector("button").textContent = "Edit todo";
+      this.dialog.querySelector("h1").textContent = "Edit todo";
+      this.dialog.showModal();
+    });
+  }
 }

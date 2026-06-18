@@ -32,6 +32,7 @@ class Controller {
 
     this.todoView.bindAddToDo(() => this.handleAddToDo());
     this.todoView.bindDeleteToDo((button) => this.handleDeleteToDo(button));
+    this.todoView.bindEditToDo();
   }
 
   displayProjects() {
