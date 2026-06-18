@@ -237,10 +237,10 @@ class Controller {
       todoObject,
       form.title.value,
       form.description.value,
-      form.dueDate.value,
+      form["due-date"].value,
       form.priority.value,
       form.notes.value,
-      form.belongsTo.value,
+      form.project.value,
     );
   }
 
