@@ -34,8 +34,7 @@ export default function createForm(submitButtonName) {
   inputs.push(createProjectDropdown("project"));
 
   for (let i = 0; i < labels.length; i++) {
-    divs[i].append(labels[i]);
-    divs[i].append(inputs[i]);
+    divs[i].append(labels[i], inputs[i]);
 
     form.append(divs[i]);
   }
