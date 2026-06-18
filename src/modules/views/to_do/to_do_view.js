@@ -9,29 +9,18 @@ export default class ToDoView {
   constructor() {
     this.app = document.querySelector(".todos");
 
-    this.addToDoDialog = createDialog();
-    this.addToDoDialog.id = "add-todo";
-    this.addToDoForm = createForm();
-    this.addToDoDialog.append(this.addToDoForm);
-
-    this.editToDoDialog = createDialog();
-    this.editToDoForm = createForm();
-    this.editToDoDialog.append(this.editToDoForm);
+    this.dialog = createDialog();
+    this.form = createForm();
+    this.dialog.append(this.form);
 
     this.addToDoButton = document.createElement("button");
     this.addToDoButton.textContent = "Add todo";
-    this.addToDoButton.setAttribute("command", "show-modal");
-    this.addToDoButton.setAttribute("commandfor", "add-todo");
 
     this.emptyMessage = document.createElement("div");
     this.emptyMessage.classList.add("empty-message");
     this.emptyMessage.textContent = "You don't have any tasks, what a bum";
 
-    this.app.append(
-      this.addToDoButton,
-      this.addToDoDialog,
-      this.editToDoDialog,
-    );
+    this.app.append(this.addToDoButton, this.dialog);
   }
 
   render(todo) {
@@ -83,14 +72,20 @@ export default class ToDoView {
   emptyApp() {
     this.app.textContent = "";
     this.app.append(this.addToDoButton);
-    this.app.append(this.addToDoDialog);
+    this.app.append(this.dialog);
   }
 
   bindAddToDo(handler) {
-    this.addToDoForm.addEventListener("submit", (event) => {
+    this.addToDoButton.addEventListener("click", () => {
+      this.form.querySelector("button").textContent = "Add todo";
+      this.dialog.querySelector("h1").textContent = "Add todo";
+      this.dialog.showModal();
+    });
+
+    this.form.addEventListener("submit", (event) => {
       event.preventDefault();
       handler();
-      this.addToDoForm.childNodes.forEach((div) => {
+      this.form.childNodes.forEach((div) => {
         if (div.lastChild.tagName !== "SELECT") div.lastChild.value = "";
       });
     });
