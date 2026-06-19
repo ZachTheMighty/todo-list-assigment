@@ -94,6 +94,7 @@ export default class ToDoView {
 
     this.form.addEventListener("submit", (event) => {
       if (this.form.id !== "add") return;
+      this.dialog.close();
       event.preventDefault();
       handler();
       this.form.childNodes.forEach((div) => {
@@ -126,6 +127,7 @@ export default class ToDoView {
 
     this.form.addEventListener("submit", (event) => {
       if (this.form.id !== "edit") return;
+      this.dialog.close();
       event.preventDefault();
       handler(todoToBeRenamed);
       this.form.childNodes.forEach((div) => {
