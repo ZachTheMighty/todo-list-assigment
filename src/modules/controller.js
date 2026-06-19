@@ -243,6 +243,29 @@ class Controller {
       form.notes.value,
       form.project.value,
     );
+
+    const projectBeforeEdit =
+      ProjectModel.projects[this.findTodo(todoObject.id).projectIndex];
+
+    const projectAfterEdit = this.getCorrespondingProjectObject(
+      this.getProjectObjectFromId(todoObject.belongsTo),
+    );
+
+    this.todoView.emptyApp();
+
+    if (projectAfterEdit === projectBeforeEdit)
+      for (let i = 0; i < projectBeforeEdit.todos.length; i++)
+        this.todoView.render(projectBeforeEdit.todos[i]);
+    else {
+      const todoPos = this.findTodo(todoObject.id).todoIndex;
+      projectBeforeEdit.todos.splice(todoPos, 1);
+
+      projectAfterEdit.todos.push(todoObject);
+
+      if (projectBeforeEdit.todos.length === 0) this.todoView.render(null);
+      else
+        projectBeforeEdit.todos.forEach((todo) => this.todoView.render(todo));
+    }
   }
 
   findTodo(todoId) {
