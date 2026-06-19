@@ -253,6 +253,16 @@ class Controller {
       }
     }
   }
+
+  getProjectObjectFromId(projectId) {
+    let result;
+    this.projectView.app.childNodes.forEach((node) => {
+      if (node.classList.contains("project"))
+        if (node.lastChild.getAttribute("data-id") === projectId)
+          result = node.firstChild;
+    });
+    return result;
+  }
 }
 
 export default new Controller(
