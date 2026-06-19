@@ -40,10 +40,12 @@ export default class ProjectView {
 
     const editImage = document.createElement("img");
     editImage.src = editIcon;
+    editImage.alt = "edit icon";
     editImage.classList.add("edit-project");
 
     const deleteProjectButton = document.createElement("img");
     deleteProjectButton.src = deleteIcon;
+    deleteProjectButton.alt = "delete icon";
     deleteProjectButton.classList.add("delete-project");
     deleteProjectButton.setAttribute("data-id", project.id);
 

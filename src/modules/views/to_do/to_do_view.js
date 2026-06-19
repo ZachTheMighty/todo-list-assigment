@@ -57,11 +57,13 @@ export default class ToDoView {
 
     const deleteButton = document.createElement("img");
     deleteButton.src = deleteIcon;
+    deleteButton.alt = "delete icon";
     deleteButton.classList.add("delete-todo");
     deleteButton.setAttribute("data-id", todo.id);
 
     const editImage = document.createElement("img");
     editImage.src = editIcon;
+    editImage.alt = "edit icon";
     editImage.classList.add("edit-todo");
 
     toDoInfo.append(editImage);
