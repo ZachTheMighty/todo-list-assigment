@@ -75,6 +75,11 @@ export default class ToDoView {
 
     toDoDiv.append(wrapper, horizontalLine);
 
+    if (todo.isChecked) {
+      checkBox.checked = true;
+      toDoDiv.classList.toggle("checked");
+    }
+
     this.app.append(toDoDiv);
   }
 
