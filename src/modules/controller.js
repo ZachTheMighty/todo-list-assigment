@@ -36,6 +36,9 @@ class Controller {
       (todo) => this.handleEditTodo(todo),
       (todo) => this.handleSaveTodoInfo(todo),
     );
+    this.todoView.bindToggleCheckTodo((todoLabel) =>
+      this.handleToggleCheckTodo(todoLabel),
+    );
   }
 
   displayProjects() {
@@ -281,6 +284,14 @@ class Controller {
     form.priority.value = todoObject.priority;
     form.notes.value = todoObject.notes;
     form.project.value = todoObject.belongsTo;
+  }
+
+  handleToggleCheckTodo(todoLabel) {
+    const todoObject = this.getCorrespondingTodoObject(todoLabel);
+    const project = this.getCorrespondingProjectObject(
+      this.getProjectObjectFromId(todoObject.belongsTo),
+    );
+    this.todoModel.toggleCheck(todoObject);
   }
 
   findTodo(todoId) {

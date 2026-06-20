@@ -136,4 +136,11 @@ export default class ToDoView {
       });
     });
   }
+
+  bindToggleCheckTodo(handler) {
+    this.app.addEventListener("click", (event) => {
+      const checkbox = event.target.closest("input[type='checkbox']");
+      if (checkbox) handler(checkbox.nextElementSibling);
+    });
+  }
 }

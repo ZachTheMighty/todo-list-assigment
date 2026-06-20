@@ -19,4 +19,8 @@ export default class ToDoModel {
     todo.notes = notes;
     todo.belongsTo = belongsTo;
   }
+
+  toggleCheck(todo) {
+    todo.isChecked = !todo.isChecked;
+  }
 }
