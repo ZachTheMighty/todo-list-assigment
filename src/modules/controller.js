@@ -217,6 +217,8 @@ class Controller {
     const lastToDo = this.todoModel.todos.at(-1);
     const projects = ProjectModel.projects;
 
+    store(lastToDo);
+
     projects.forEach((project) => {
       if (project.id === lastToDo.belongsTo) {
         project.todos.push(lastToDo);
@@ -322,23 +324,51 @@ class Controller {
 
   loadItems() {
     const objects = Object.values(localStorage);
-    if (objects.length === 0) {
-      return;
-    }
+    if (objects.length === 0) return;
+
     this.projectView.emptyApp();
+
+    let selectedProject;
 
     objects.forEach((object) => {
       if (!JSON.parse(object).belongsTo) {
         const jsonProject = JSON.parse(object);
 
+        if (jsonProject.selected) selectedProject = jsonProject;
+
         if (jsonProject.id !== this.defaultProject.id)
           ProjectModel.addProject(jsonProject);
-
         addProjectToDropDown(jsonProject);
       }
     });
 
+    objects.forEach((object) => {
+      if (JSON.parse(object).belongsTo) {
+        const jsonTodo = JSON.parse(object);
+        const projects = ProjectModel.projects;
+
+        for (let i = 0; i < projects.length; i++)
+          if (projects[i].id === jsonTodo.belongsTo) {
+            if (projects[i].todos.length === 0) {
+              projects[i].todos.push(jsonTodo);
+              return;
+            }
+            let todoAlreadyExists = false;
+            for (let j = 0; j < projects[i].todos.length; j++)
+              if (projects[i].todos[j].id === jsonTodo.id)
+                todoAlreadyExists = true;
+
+            if (!todoAlreadyExists) projects[i].todos.push(jsonTodo);
+          }
+      }
+    });
+
     this.displayProjects();
+
+    if (!selectedProject) selectedProject = this.defaultProject;
+    this.todoView.emptyApp();
+    for (let i = 0; i < selectedProject.todos.length; i++)
+      this.todoView.render(selectedProject.todos[i]);
   }
 }
 
