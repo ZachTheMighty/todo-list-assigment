@@ -4,7 +4,7 @@ export default class ProjectModel {
       name: "Default project",
       selected: true,
       todos: [],
-      id: crypto.randomUUID(),
+      id: "f52ae929-ede1-49a7-bee6-9b16e99e33fa",
     };
 
     ProjectModel.addProject(this.defaultProject);
