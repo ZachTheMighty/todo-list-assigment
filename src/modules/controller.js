@@ -8,6 +8,8 @@ import { renameProjectInDropdown } from "./views/to_do/create_widgets.js";
 import { deleteProjectInDropdown } from "./views/to_do/create_widgets.js";
 import { selectProjectInDropdown } from "./views/to_do/create_widgets.js";
 
+import { store, remove } from "./local_storage.js";
+
 class Controller {
   constructor(projectModel, projectView, todoModel, todoView) {
     this.projectModel = projectModel;
@@ -65,6 +67,7 @@ class Controller {
     this.todoView.render(null);
 
     addProjectToDropDown(lastestProject);
+    store(lastestProject);
   }
 
   handleRenameProject(project) {
@@ -78,6 +81,7 @@ class Controller {
     this.projectView.renderProjectNameUpdate(project, projectName);
 
     renameProjectInDropdown(projectObject);
+    store(projectObject);
   }
 
   handleDeleteProject(deleteProjectButton) {
@@ -86,13 +90,14 @@ class Controller {
       if (ProjectModel.projects[i].id === id) {
         if (ProjectModel.projects[i].selected)
           this.determineFocus(deleteProjectButton);
-
         ProjectModel.removeProject(i);
+
         this.displayProjects();
 
         if (ProjectModel.isEmpty()) this.projectView.render(null);
 
         deleteProjectInDropdown(id);
+        remove(id);
       }
     }
   }
@@ -313,6 +318,27 @@ class Controller {
           result = node.firstChild;
     });
     return result;
+  }
+
+  loadItems() {
+    const objects = Object.values(localStorage);
+    if (objects.length === 0) {
+      return;
+    }
+    this.projectView.emptyApp();
+
+    objects.forEach((object) => {
+      if (!JSON.parse(object).belongsTo) {
+        const jsonProject = JSON.parse(object);
+
+        if (jsonProject.id !== this.defaultProject.id)
+          ProjectModel.addProject(jsonProject);
+
+        addProjectToDropDown(jsonProject);
+      }
+    });
+
+    this.displayProjects();
   }
 }
 
