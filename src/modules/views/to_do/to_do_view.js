@@ -110,7 +110,7 @@ export default class ToDoView {
     });
   }
 
-  bindEditToDo(handler) {
+  bindEditToDo(editTodoHandler, saveTodoInfoHandler) {
     let todoToBeRenamed = null;
 
     this.app.addEventListener("click", (event) => {
@@ -119,6 +119,7 @@ export default class ToDoView {
 
       todoToBeRenamed = editImage.previousElementSibling.previousElementSibling;
 
+      saveTodoInfoHandler(todoToBeRenamed);
       this.form.id = "edit";
       this.form.querySelector("button").textContent = "Edit todo";
       this.dialog.querySelector("h1").textContent = "Edit todo";
@@ -129,7 +130,7 @@ export default class ToDoView {
       if (this.form.id !== "edit") return;
       this.dialog.close();
       event.preventDefault();
-      handler(todoToBeRenamed);
+      editTodoHandler(todoToBeRenamed);
       this.form.childNodes.forEach((div) => {
         if (div.lastChild.tagName !== "SELECT") div.lastChild.value = "";
       });
