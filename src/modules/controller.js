@@ -367,6 +367,8 @@ class Controller {
 
     if (!selectedProject) selectedProject = this.defaultProject;
     this.todoView.emptyApp();
+
+    if (selectedProject.todos.length === 0) this.todoView.render(null);
     for (let i = 0; i < selectedProject.todos.length; i++)
       this.todoView.render(selectedProject.todos[i]);
   }
