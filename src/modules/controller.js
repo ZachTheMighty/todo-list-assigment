@@ -236,6 +236,7 @@ class Controller {
     ).projectIndex;
 
     this.todoModel.deleteToDo(todoIndex);
+    remove(ProjectModel.projects[projectIndex].todos[todoIndex].id);
     ProjectModel.projects[projectIndex].todos.splice(todoIndex, 1);
 
     this.handleDisplayTodos(
