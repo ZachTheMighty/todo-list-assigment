@@ -20,11 +20,14 @@ body {
   padding: 0;
   background-color: #c5fffd;
   user-select: none;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
 
 main {
+  flex: 1;
   width: 70%;
-  height: 90vh;
   margin: 50px auto;
   border-radius: 10px;
   display: flex;
@@ -225,4 +228,8 @@ form > div + div {
 
 textarea {
   resize: vertical;
+}
+
+.github-icon {
+  width: 50px;
 }
