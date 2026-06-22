@@ -302,6 +302,7 @@ class Controller {
       this.getProjectObjectFromId(todoObject.belongsTo),
     );
     this.todoModel.toggleCheck(todoObject);
+    store(todoObject);
     this.todoView.emptyApp();
     project.todos.forEach((todo) => this.todoView.render(todo));
   }
