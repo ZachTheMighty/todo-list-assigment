@@ -8,7 +8,9 @@ import { renameProjectInDropdown } from "./views/to_do/create_widgets.js";
 import { deleteProjectInDropdown } from "./views/to_do/create_widgets.js";
 import { selectProjectInDropdown } from "./views/to_do/create_widgets.js";
 
-import { store, remove } from "./local_storage.js";
+import { store, remove } from "./local_storage/local_storage.js";
+import loadProjects from "./local_storage/load_projects.js";
+import loadTodos from "./local_storage/load_todos.js";
 
 class Controller {
   constructor(projectModel, projectView, todoModel, todoView) {
@@ -327,49 +329,18 @@ class Controller {
   }
 
   loadItems() {
-    const objects = Object.values(localStorage);
+    const objects = Object.values(localStorage).map((object) =>
+      JSON.parse(object),
+    );
     if (objects.length === 0) return;
+
+    const projects = objects.filter((object) => !object.belongsTo);
+    const todos = objects.filter((object) => object.belongsTo);
 
     this.projectView.emptyApp();
 
-    let selectedProject;
-
-    objects.forEach((object) => {
-      if (!JSON.parse(object).belongsTo) {
-        const jsonProject = JSON.parse(object);
-
-        if (jsonProject.selected) selectedProject = jsonProject;
-
-        if (jsonProject.id !== this.defaultProject.id)
-          ProjectModel.addProject(jsonProject);
-        addProjectToDropDown(jsonProject);
-      }
-    });
-
-    objects.forEach((object) => {
-      if (JSON.parse(object).belongsTo) {
-        const jsonTodo = JSON.parse(object);
-        const projects = ProjectModel.projects;
-
-        for (let i = 0; i < projects.length; i++)
-          if (projects[i].id === jsonTodo.belongsTo) {
-            if (projects[i].todos.length === 0) {
-              this.todoModel.todos.push(jsonTodo);
-              projects[i].todos.push(jsonTodo);
-              return;
-            }
-            let todoAlreadyExists = false;
-            for (let j = 0; j < projects[i].todos.length; j++)
-              if (projects[i].todos[j].id === jsonTodo.id)
-                todoAlreadyExists = true;
-
-            if (!todoAlreadyExists) {
-              this.todoModel.todos.push(jsonTodo);
-              projects[i].todos.push(jsonTodo);
-            }
-          }
-      }
-    });
+    let selectedProject = loadProjects(projects);
+    loadTodos(todos, this.todoModel.todos);
 
     this.displayProjects();
 
