@@ -353,6 +353,7 @@ class Controller {
         for (let i = 0; i < projects.length; i++)
           if (projects[i].id === jsonTodo.belongsTo) {
             if (projects[i].todos.length === 0) {
+              this.todoModel.todos.push(jsonTodo);
               projects[i].todos.push(jsonTodo);
               return;
             }
@@ -361,7 +362,10 @@ class Controller {
               if (projects[i].todos[j].id === jsonTodo.id)
                 todoAlreadyExists = true;
 
-            if (!todoAlreadyExists) projects[i].todos.push(jsonTodo);
+            if (!todoAlreadyExists) {
+              this.todoModel.todos.push(jsonTodo);
+              projects[i].todos.push(jsonTodo);
+            }
           }
       }
     });
