@@ -258,6 +258,8 @@ class Controller {
       form.project.value,
     );
 
+    store(todoObject);
+
     const projectBeforeEdit =
       ProjectModel.projects[this.findTodo(todoObject.id).projectIndex];
 
